@@ -2,99 +2,155 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
-}
-
-.dark {
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
-}
-
 @layer base {
+  :root {
+    /* Systems in Motion Design System */
+    --bg: #0B132B;
+    --fg: #F8F9FA;
+    --muted: #AAB2C8;
+    --primary: #00A8E8;
+    --accent: #6BE6FF;
+    --graphite: #1C1C1C;
+    --glow-blue: 0 0 24px rgba(0, 168, 232, 0.45);
+    
+    /* shadcn/ui variables */
+    --background: 11 20 43;
+    --foreground: 248 249 250;
+    --card: 11 20 43;
+    --card-foreground: 248 249 250;
+    --popover: 11 20 43;
+    --popover-foreground: 248 249 250;
+    --primary-shadcn: 0 168 232;
+    --primary-foreground: 11 20 43;
+    --secondary: 28 28 28;
+    --secondary-foreground: 248 249 250;
+    --muted-shadcn: 170 178 200;
+    --muted-foreground: 170 178 200;
+    --accent-shadcn: 107 230 255;
+    --accent-foreground: 11 20 43;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 28 28 28;
+    --input: 28 28 28;
+    --ring: 0 168 232;
+    --radius: 0.5rem;
+  }
+  
   * {
-    @apply border-gray-700;
+    @apply border-border;
   }
-
+  
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+  
+  html,
   body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    height: 100%;
+    overflow-x: hidden;
   }
-
-  /* Scrollbar styling for terminal */
-  ::-webkit-scrollbar {
-    width: 8px;
+  
+  body {
+    @apply bg-[var(--bg)] text-[var(--fg)] antialiased;
+    font-family: var(--font-sans), sans-serif;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(0, 168, 232, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(107, 230, 255, 0.05) 0%, transparent 50%);
+    background-attachment: fixed;
   }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-gray-900;
+  
+  /* Typography */
+  .font-display {
+    font-family: var(--font-serif), serif;
   }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-gray-700 rounded;
+  
+  .font-mono {
+    font-family: var(--font-mono), monospace;
   }
-
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-600;
+  
+  /* Glass panels - Browser Company inspired */
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px 0 rgba(0, 0, 0, 0.37),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      0 8px 32px 0 rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+  }
+  
+  /* Glow effects */
+  .glow-blue {
+    box-shadow: var(--glow-blue);
+  }
+  
+  /* Text selection */
+  ::selection {
+    background: var(--primary);
+    color: var(--bg);
+  }
+  
+  /* Focus styles - refined */
+  *:focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-[var(--primary)];
+    outline-style: solid;
+    border-radius: 4px;
+  }
+  
+  /* Smooth transitions for interactive elements */
+  button, a, [role="button"] {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Refined hover states */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Skip to content link */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50;
+    @apply px-4 py-2 bg-[var(--primary)] text-[var(--bg)] rounded;
   }
 }
 
-/* Markdown prose styles for terminal output */
-.prose-invert {
-  @apply text-gray-300;
-}
-
-.prose-invert h1 {
-  @apply text-cyan-400 text-2xl font-bold mb-4 mt-6;
-}
-
-.prose-invert h2 {
-  @apply text-green-400 text-xl font-bold mb-3 mt-5;
-}
-
-.prose-invert h3 {
-  @apply text-blue-400 text-lg font-bold mb-2 mt-4;
-}
-
-.prose-invert p {
-  @apply mb-3 leading-relaxed;
-}
-
-.prose-invert ul {
-  @apply list-disc list-inside mb-3 space-y-1;
-}
-
-.prose-invert li {
-  @apply text-gray-300;
-}
-
-.prose-invert strong {
-  @apply text-white font-semibold;
-}
-
-.prose-invert a {
-  @apply text-blue-400 hover:text-blue-300 underline;
-}
-
-.prose-invert code {
-  @apply bg-gray-800 px-1.5 py-0.5 rounded text-cyan-400;
-}
-
-/* Smooth animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+@layer utilities {
+  /* Motion-safe utilities */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
-
-.animate-fadeIn {
-  animation: fadeIn 0.3s ease-out;
-}
-
 
