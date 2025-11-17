@@ -47,8 +47,8 @@ export default function ProjectsScene() {
   return (
     <>
       <ambientLight intensity={0.4} />
-      <pointLight position={[10, 10, 10]} intensity={0.6} color="#00A8E8" />
-      <pointLight position={[-10, -10, -10]} intensity={0.4} color="#6BE6FF" />
+      <pointLight position={[10, 10, 10]} intensity={0.5} color="#FFFFFF" />
+      <pointLight position={[-10, -10, -10]} intensity={0.3} color="#E8F0F8" />
 
       <points ref={particlesRef}>
         <bufferGeometry>
@@ -59,9 +59,9 @@ export default function ProjectsScene() {
         </bufferGeometry>
         <pointsMaterial
           size={0.1}
-          color="#00A8E8"
+          color="#FFFFFF"
           transparent
-          opacity={0.6}
+          opacity={0.4}
           sizeAttenuation={true}
         />
       </points>
@@ -82,8 +82,8 @@ export default function ProjectsScene() {
                   z,
                 ],
               ]}
-              color="#6BE6FF"
-              opacity={0.3}
+              color="#E8F0F8"
+              opacity={0.2}
               transparent
             />
           );
@@ -93,11 +93,13 @@ export default function ProjectsScene() {
       <mesh position={[0, 0, 0]}>
         <octahedronGeometry args={[0.5, 0]} />
         <meshStandardMaterial
-          color="#00A8E8"
-          emissive="#00A8E8"
-          emissiveIntensity={0.5}
-          metalness={0.8}
-          roughness={0.2}
+          color="#FFFFFF"
+          emissive="#FFFFFF"
+          emissiveIntensity={0.2}
+          metalness={0.9}
+          roughness={0.1}
+          opacity={0.5}
+          transparent
         />
       </mesh>
     </>
