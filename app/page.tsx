@@ -1,31 +1,20 @@
-'use client';
+"use client";
 
-import { Terminal } from '@/components/Terminal';
-import { useEffect } from 'react';
+import LandingReactor from "./sections/LandingReactor";
+import AboutBlueprint from "./sections/AboutBlueprint";
+import ProjectsGallery from "./sections/ProjectsGallery";
+import ImpactRipples from "./sections/ImpactRipples";
+import ContactSignal from "./sections/ContactSignal";
 
-export default function Home() {
-  // Initialize theme on mount
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-
-    if (!savedTheme) {
-      localStorage.setItem('theme', theme);
-    }
-  }, []);
-
+export default function Page() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black dark:from-black dark:via-gray-950 dark:to-gray-900 p-4 md:p-8 flex items-center justify-center">
-      <Terminal />
-    </main>
+    <>
+      <LandingReactor />
+      <AboutBlueprint />
+      <ProjectsGallery />
+      <ImpactRipples />
+      <ContactSignal />
+    </>
   );
 }
-
 
