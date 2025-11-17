@@ -50,8 +50,8 @@ const config: Config = {
         ring: "hsl(var(--ring))",
       },
       boxShadow: {
-        glow: "0 0 24px rgba(0, 168, 232, 0.45)",
-        "glow-lg": "0 0 40px rgba(0, 168, 232, 0.6)",
+        glow: "0 0 24px rgba(255, 255, 255, 0.1)",
+        "glow-lg": "0 0 40px rgba(255, 255, 255, 0.15)",
       },
       container: {
         center: true,
