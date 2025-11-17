@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { ExternalLink, Github, FileText, ArrowUpRight } from "lucide-react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { ExternalLink, Github, FileText } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { fadeIn } from "@/lib/motion";
 import { Project } from "@/app/data/projects";
 
@@ -27,120 +27,135 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         transition={{ delay: index * 0.1 }}
       >
         <Card
-          className="bg-white border border-[var(--border-color)] cursor-pointer group hover:shadow-lg hover:border-[var(--primary)] transition-all duration-200"
+          className="glass border-[var(--graphite)] cursor-pointer h-full group hover-lift transition-all duration-300 hover:border-[var(--primary)]/50"
           onClick={() => setOpen(true)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setOpen(true);
+            }
+          }}
+          tabIndex={0}
+          role="button"
+          aria-expanded={open}
+          aria-controls={`project-${project.id}`}
         >
-          <CardHeader className="p-6">
-            <div className="flex items-start justify-between mb-4">
-              <h3 className="text-2xl font-semibold text-[var(--fg)] group-hover:text-[var(--primary)] transition-colors">
-                {project.title}
-              </h3>
-              <ArrowUpRight className="h-5 w-5 text-[var(--muted)] group-hover:text-[var(--primary)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+          <div className="relative h-48 overflow-hidden rounded-t-lg">
+            <div className="w-full h-full bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] opacity-20 group-hover:opacity-30 transition-opacity" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-4xl font-display text-[var(--primary)] opacity-50">
+                {project.title.charAt(0)}
+              </span>
             </div>
-            <p className="text-[var(--muted)] text-base leading-relaxed">
+          </div>
+          <CardHeader>
+            <div className="flex items-start justify-between mb-2">
+              <CardTitle className="text-xl">{project.title}</CardTitle>
+              <Badge variant="outline" className="font-mono text-xs">
+                {project.year}
+              </Badge>
+            </div>
+            <CardDescription className="text-[var(--muted)]">
               {project.tagline}
-            </p>
+            </CardDescription>
           </CardHeader>
-          <CardContent className="px-6 pb-6">
-            <div className="flex flex-wrap gap-2">
-              {project.tech.slice(0, 4).map((tech) => (
-                <span
+          <CardContent>
+            <div className="flex flex-wrap gap-2 mb-4">
+              {project.tech.slice(0, 3).map((tech) => (
+                <Badge
                   key={tech}
-                  className="text-xs px-3 py-1 bg-[var(--bg-secondary)] text-[var(--muted)] rounded-full font-medium"
+                  variant="secondary"
+                  className="text-xs font-mono bg-[var(--graphite)] text-[var(--muted)]"
                 >
                   {tech}
-                </span>
+                </Badge>
               ))}
-              {project.tech.length > 4 && (
-                <span className="text-xs px-3 py-1 bg-[var(--bg-secondary)] text-[var(--muted)] rounded-full font-medium">
-                  +{project.tech.length - 4}
-                </span>
+              {project.tech.length > 3 && (
+                <Badge variant="secondary" className="text-xs font-mono">
+                  +{project.tech.length - 3}
+                </Badge>
               )}
             </div>
+            <p className="text-sm text-[var(--muted)] line-clamp-2">
+              {project.summary}
+            </p>
           </CardContent>
         </Card>
       </motion.div>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-3xl bg-white border border-[var(--border-color)] max-h-[90vh] overflow-y-auto p-8">
-          <div className="space-y-8">
+        <DialogContent className="max-w-3xl glass border-[var(--graphite)] max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-display">{project.title}</DialogTitle>
+            <DialogDescription className="text-[var(--muted)]">
+              {project.tagline}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-6">
+            <div className="relative h-64 rounded-lg overflow-hidden bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] opacity-20" />
+
             <div>
-              <h2 className="text-4xl font-bold mb-4 text-[var(--fg)]">{project.title}</h2>
-              <p className="text-xl text-[var(--muted)]">{project.tagline}</p>
+              <h3 className="font-semibold mb-2">Summary</h3>
+              <p className="text-[var(--muted)]">{project.summary}</p>
             </div>
 
             <div>
-              <h3 className="text-sm font-medium text-[var(--muted)] uppercase tracking-wider mb-4">
-                Overview
-              </h3>
-              <p className="text-lg text-[var(--fg)] leading-relaxed">{project.summary}</p>
-            </div>
-
-            <div>
-              <h3 className="text-sm font-medium text-[var(--muted)] uppercase tracking-wider mb-4">
-                Highlights
-              </h3>
-              <ul className="space-y-3">
+              <h3 className="font-semibold mb-2">Highlights</h3>
+              <ul className="list-disc list-inside space-y-1 text-[var(--muted)]">
                 {project.highlights.map((highlight, i) => (
-                  <li key={i} className="flex items-start gap-3 text-[var(--fg)]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] mt-2 flex-shrink-0" />
-                    {highlight}
-                  </li>
+                  <li key={i}>{highlight}</li>
                 ))}
               </ul>
             </div>
 
             <div>
-              <h3 className="text-sm font-medium text-[var(--muted)] uppercase tracking-wider mb-4">
-                Technologies
-              </h3>
+              <h3 className="font-semibold mb-2">Technologies</h3>
               <div className="flex flex-wrap gap-2">
                 {project.tech.map((tech) => (
-                  <span
+                  <Badge
                     key={tech}
-                    className="px-3 py-1.5 bg-[var(--bg-secondary)] text-[var(--fg)] rounded-lg text-sm font-medium"
+                    variant="secondary"
+                    className="font-mono bg-[var(--graphite)]"
                   >
                     {tech}
-                  </span>
+                  </Badge>
                 ))}
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-4 pt-6 border-t border-[var(--border-color)]">
+            <div className="flex gap-4 pt-4">
               {project.links.live && (
-                <Button
-                  asChild
-                  className="bg-[var(--primary)] hover:bg-[var(--accent)] text-white"
+                <a 
+                  href={project.links.live} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-4 py-2 bg-[var(--primary)] hover:bg-[var(--accent)] text-[var(--bg)] rounded-lg transition-colors"
                 >
-                  <a href={project.links.live} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Live Site
-                  </a>
-                </Button>
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  Live Site
+                </a>
               )}
               {project.links.repo && (
-                <Button
-                  asChild
-                  variant="outline"
-                  className="border-[var(--border-color)] hover:border-[var(--primary)]"
+                <a 
+                  href={project.links.repo} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-4 py-2 border border-[var(--graphite)] hover:border-[var(--primary)] rounded-lg transition-colors"
                 >
-                  <a href={project.links.repo} target="_blank" rel="noopener noreferrer">
-                    <Github className="h-4 w-4 mr-2" />
-                    Repository
-                  </a>
-                </Button>
+                  <Github className="h-4 w-4 mr-2" />
+                  Repository
+                </a>
               )}
               {project.links.doc && (
-                <Button
-                  asChild
-                  variant="outline"
-                  className="border-[var(--border-color)] hover:border-[var(--primary)]"
+                <a 
+                  href={project.links.doc} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-4 py-2 border border-[var(--graphite)] hover:border-[var(--primary)] rounded-lg transition-colors"
                 >
-                  <a href={project.links.doc} target="_blank" rel="noopener noreferrer">
-                    <FileText className="h-4 w-4 mr-2" />
-                    Documentation
-                  </a>
-                </Button>
+                  <FileText className="h-4 w-4 mr-2" />
+                  Documentation
+                </a>
               )}
             </div>
           </div>
