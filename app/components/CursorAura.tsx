@@ -10,71 +10,61 @@ export default function CursorAura() {
   const y = useMotionValue(-200);
   const followerX = useSpring(x, springConfig);
   const followerY = useSpring(y, springConfig);
-  const [enabled, setEnabled] = useState(true);
-  const [mounted, setMounted] = useState(false);
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    
-    // Check if we're on a device with a mouse
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches || 
-                         'ontouchstart' in window || 
-                         navigator.maxTouchPoints > 0;
+    const pointerFine = window.matchMedia("(pointer: fine)");
 
     const updateEnabled = () => {
-      setEnabled(!isTouchDevice && !prefersReducedMotion.matches);
+      setEnabled(pointerFine.matches && !prefersReducedMotion.matches);
     };
 
     updateEnabled();
-    
     const handleMouseMove = (event: MouseEvent) => {
-      x.set(event.clientX);
-      y.set(event.clientY);
+      x.set(event.clientX - 150);
+      y.set(event.clientY - 150);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     prefersReducedMotion.addEventListener("change", updateEnabled);
+    pointerFine.addEventListener("change", updateEnabled);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       prefersReducedMotion.removeEventListener("change", updateEnabled);
+      pointerFine.removeEventListener("change", updateEnabled);
     };
   }, [x, y]);
 
-  if (!mounted || !enabled) return null;
+  if (!enabled) return null;
 
   return (
     <>
       <motion.div
-        aria-hidden="true"
-        className="pointer-events-none fixed z-[9999] h-72 w-72 rounded-full mix-blend-screen hidden md:block"
+        aria-hidden
+        className="pointer-events-none fixed z-[60] h-72 w-72 rounded-full opacity-0 mix-blend-screen transition-opacity duration-500 md:block"
         style={{
           x: followerX,
           y: followerY,
           background:
-            "radial-gradient(circle at center, rgba(96,165,250,0.35), rgba(147,197,253,0.15) 45%, rgba(10,22,40,0) 70%)",
-          filter: "blur(16px)",
-          transform: "translate(-50%, -50%)",
+            "radial-gradient(circle at center, rgba(0,168,232,0.35), rgba(107,230,255,0.1) 45%, rgba(11,19,43,0))",
+          filter: "blur(12px)",
         }}
         initial={{ opacity: 0 }}
-        animate={{ opacity: enabled ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
+        animate={{ opacity: 1 }}
       />
       <motion.div
-        aria-hidden="true"
-        className="pointer-events-none fixed z-[10000] h-3 w-3 rounded-full bg-white/80 shadow-[0_0_24px_rgba(96,165,250,0.6)] hidden md:block"
+        aria-hidden
+        className="pointer-events-none fixed z-[61] hidden h-4 w-4 rounded-full bg-white/90 shadow-[0_0_20px_rgba(255,255,255,0.6)] md:block"
         style={{
           x: followerX,
           y: followerY,
-          transform: "translate(-50%, -50%)",
         }}
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: enabled ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
+        initial={{ scale: 0.8 }}
+        animate={{ scale: 1 }}
       />
     </>
   );
 }
-
 
