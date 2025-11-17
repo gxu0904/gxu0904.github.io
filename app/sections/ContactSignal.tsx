@@ -41,7 +41,7 @@ export default function ContactSignal() {
 
   return (
     <Section id="contact" className="py-24">
-      <div className="max-w-2xl mx-auto space-y-12">
+      <div className="max-w-4xl mx-auto space-y-8 md:space-y-12">
         <motion.div
           variants={fadeIn}
           initial="hidden"
@@ -49,24 +49,24 @@ export default function ContactSignal() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             Contact
           </h2>
-          <p className="text-lg text-[var(--muted)]">
+          <p className="text-base md:text-lg text-[var(--muted)] leading-relaxed max-w-2xl mx-auto">
             Let&apos;s connect. Whether it&apos;s collaboration, questions, or just saying
             hello—I&apos;d love to hear from you.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           <motion.div
             variants={fadeIn}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
           >
-            <Card className="glass border-[var(--graphite)]/50 p-8 hover-lift">
-              <h3 className="font-semibold mb-4 font-mono text-sm uppercase tracking-wider text-[var(--primary)]">
+            <Card className="glass border-[var(--graphite)]/50 p-6 md:p-8 hover-lift glass-hover">
+              <h3 className="font-semibold mb-4 md:mb-6 font-mono text-xs md:text-sm uppercase tracking-wider text-[var(--muted)]">
                 Direct Links
               </h3>
               <div className="space-y-3">
@@ -77,7 +77,7 @@ export default function ContactSignal() {
                       key={link.label}
                       as="a"
                       href={link.href}
-                      className="w-full justify-start bg-[var(--graphite)] hover:bg-[var(--primary)] text-left"
+                      className="w-full justify-start bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10 text-left text-sm md:text-base"
                     >
                       <Icon className="h-4 w-4 mr-3" />
                       {link.label}
@@ -126,8 +126,8 @@ export default function ContactSignal() {
                 </motion.svg>
               )}
             </AnimatePresence>
-            <Card className="glass border-[var(--graphite)]/50 p-8 hover-lift">
-              <form onSubmit={handleSubmit} className="space-y-4">
+            <Card className="glass border-[var(--graphite)]/50 p-6 md:p-8 hover-lift glass-hover">
+              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
                 <div>
                   <Label htmlFor="name" className="text-[var(--muted)]">
                     Name
@@ -142,7 +142,7 @@ export default function ContactSignal() {
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
                       }
-                      className="mt-1 bg-[var(--graphite)] border-[var(--graphite)] focus:border-[var(--primary)] focus:ring-[var(--primary)] focus:shadow-[0_0_12px_rgba(0,168,232,0.3)] transition-all"
+                      className="mt-1 bg-white/5 border-white/10 focus:border-white/20 focus:ring-white/20 focus:shadow-[0_0_8px_rgba(255,255,255,0.1)] transition-all text-[var(--fg)]"
                       required
                     />
                   </motion.div>
@@ -162,7 +162,7 @@ export default function ContactSignal() {
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                       }
-                      className="mt-1 bg-[var(--graphite)] border-[var(--graphite)] focus:border-[var(--primary)] focus:ring-[var(--primary)] focus:shadow-[0_0_12px_rgba(0,168,232,0.3)] transition-all"
+                      className="mt-1 bg-white/5 border-white/10 focus:border-white/20 focus:ring-white/20 focus:shadow-[0_0_8px_rgba(255,255,255,0.1)] transition-all text-[var(--fg)]"
                       required
                     />
                   </motion.div>
@@ -181,14 +181,14 @@ export default function ContactSignal() {
                       onChange={(e) =>
                         setFormData({ ...formData, message: e.target.value })
                       }
-                      className="mt-1 bg-[var(--graphite)] border-[var(--graphite)] focus:border-[var(--primary)] focus:ring-[var(--primary)] focus:shadow-[0_0_12px_rgba(0,168,232,0.3)] transition-all min-h-[120px]"
+                      className="mt-1 bg-white/5 border-white/10 focus:border-white/20 focus:ring-white/20 focus:shadow-[0_0_8px_rgba(255,255,255,0.1)] transition-all min-h-[120px] text-[var(--fg)]"
                       required
                     />
                   </motion.div>
                 </div>
                 <Button
                   type="submit"
-                  className="w-full bg-[var(--primary)] hover:bg-[var(--accent)] text-[var(--bg)]"
+                  className="w-full bg-white/10 hover:bg-white/15 border border-white/10 hover:border-white/20 text-[var(--fg)]"
                 >
                   {submitted ? (
                     <>
