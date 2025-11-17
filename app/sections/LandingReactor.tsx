@@ -1,9 +1,37 @@
 "use client";
 
+import { Suspense, useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 import Section from "@/app/components/Section";
+import GlitchTitle from "@/app/components/GlitchTitle";
+import MagneticButton from "@/app/components/MagneticButton";
+import ReactorScene from "@/app/three/ReactorScene";
 
 export default function LandingReactor() {
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth) * 2 - 1;
+      const y = (e.clientY / window.innerHeight) * 2 - 1;
+      setMouse({ x, y });
+    };
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -12,52 +40,65 @@ export default function LandingReactor() {
   };
 
   return (
-    <Section id="landing" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
-      <motion.div
-        className="relative z-10 text-center px-4 max-w-5xl mx-auto"
-        initial={{ opacity: 0, y: 20 }}
+    <Section id="landing" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <Suspense
+          fallback={
+            <div className="w-full h-full flex items-center justify-center">
+              <div className="w-64 h-64 border-2 border-[var(--primary)] rounded-full animate-pulse" />
+            </div>
+          }
+        >
+          <Canvas
+            camera={{ position: [0, 0, 8 + scrollY * 0.01], fov: 50 }}
+            gl={{ antialias: true, alpha: true }}
+          >
+            <ReactorScene mouse={mouse} scrollY={scrollY} />
+            <OrbitControls
+              enableZoom={false}
+              enablePan={false}
+              autoRotate
+              autoRotateSpeed={0.5}
+              maxPolarAngle={Math.PI / 2}
+              minPolarAngle={Math.PI / 2}
+            />
+          </Canvas>
+        </Suspense>
+      </div>
+
+      <motion.div 
+        className="relative z-10 text-center px-4 max-w-4xl mx-auto"
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.6,
+        transition={{ 
+          duration: 0.8, 
           ease: [0.22, 1, 0.36, 1],
+          delay: 0.2 
         }}
       >
-        <motion.h1
-          className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight text-[var(--fg)] mb-8 leading-[0.95]"
+        <GlitchTitle className="mb-8 text-[var(--fg)]">
+          Designing logic, systems, and stories.
+        </GlitchTitle>
+        <motion.p 
+          className="text-xl sm:text-2xl text-[var(--muted)] mb-16 font-light tracking-tight"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
         >
-          Grace Xu
-        </motion.h1>
-
-        <motion.p
-          className="text-xl sm:text-2xl md:text-3xl text-[var(--muted)] mb-16 font-light max-w-3xl mx-auto leading-relaxed"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          Engineer. Researcher. Builder of systems that solve real problems.
+          Engineer. Researcher. Builder.
         </motion.p>
-
-        <motion.div
-          className="flex flex-col sm:flex-row gap-6 justify-center items-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+        <motion.div 
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <button
-            onClick={() => scrollToSection("projects")}
-            className="px-8 py-4 bg-[var(--primary)] text-white rounded-lg font-medium hover:bg-[var(--accent)] transition-colors text-lg"
-          >
-            View Work
-          </button>
-          <button
-            onClick={() => scrollToSection("contact")}
-            className="px-8 py-4 border-2 border-[var(--border-color)] text-[var(--fg)] rounded-lg font-medium hover:border-[var(--primary)] transition-colors text-lg"
-          >
+          <MagneticButton onClick={() => scrollToSection("projects")}>
+            Explore Work
+          </MagneticButton>
+          <MagneticButton onClick={() => scrollToSection("contact")}>
             Get in Touch
-          </button>
+          </MagneticButton>
         </motion.div>
       </motion.div>
     </Section>
