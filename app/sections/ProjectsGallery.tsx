@@ -27,7 +27,7 @@ export default function ProjectsGallery() {
         <Suspense
           fallback={
             <div className="w-full h-full flex items-center justify-center">
-              <div className="w-64 h-64 border-2 border-[var(--primary)] rounded-full animate-pulse" />
+              <div className="w-64 h-64 border-2 border-white/20 rounded-full animate-pulse" />
             </div>
           }
         >
@@ -46,43 +46,57 @@ export default function ProjectsGallery() {
         </Suspense>
       </div>
 
-      <div className="space-y-12 relative z-10">
-        <div className="text-center">
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+      <div className="space-y-8 md:space-y-12 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             Projects
           </h2>
-          <p className="text-lg text-[var(--muted)] max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-[var(--muted)] max-w-2xl mx-auto leading-relaxed">
             A collection of systems, research, and initiatives I&apos;ve built and
             contributed to.
           </p>
-        </div>
+        </motion.div>
 
-        <Tabs
-          value={category}
-          onValueChange={(value: string) => setCategory(value as Category)}
-          className="w-full"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <TabsList className="glass border-[var(--graphite)] grid w-full max-w-md mx-auto grid-cols-5">
-            {(["All", "Engineering", "Research", "Social Impact", "Design"] as Category[]).map(
-              (cat) => (
-                <TabsTrigger
-                  key={cat}
-                  value={cat}
-                  className="text-xs sm:text-sm font-mono data-[state=active]:bg-[var(--primary)] data-[state=active]:text-[var(--bg)]"
-                >
-                  {cat}
-                </TabsTrigger>
-              )
-            )}
-          </TabsList>
-        </Tabs>
+          <Tabs
+            value={category}
+            onValueChange={(value: string) => setCategory(value as Category)}
+            className="w-full"
+          >
+            <TabsList className="glass border-white/10 grid w-full max-w-2xl mx-auto grid-cols-3 sm:grid-cols-5 gap-1 p-1">
+              {(["All", "Engineering", "Research", "Social Impact", "Design"] as Category[]).map(
+                (cat) => (
+                  <TabsTrigger
+                    key={cat}
+                    value={cat}
+                    className="text-xs sm:text-sm font-mono data-[state=active]:bg-white/10 data-[state=active]:text-[var(--fg)] text-[var(--muted)] transition-all rounded-md"
+                  >
+                    <span className="hidden sm:inline">{cat}</span>
+                    <span className="sm:hidden">{cat === "Social Impact" ? "Impact" : cat === "Engineering" ? "Eng" : cat}</span>
+                  </TabsTrigger>
+                )
+              )}
+            </TabsList>
+          </Tabs>
+        </motion.div>
 
         <motion.div
           variants={stagger}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
         >
           {filteredProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
@@ -90,9 +104,13 @@ export default function ProjectsGallery() {
         </motion.div>
 
         {filteredProjects.length === 0 && (
-          <div className="text-center py-12 text-[var(--muted)]">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-12 text-[var(--muted)]"
+          >
             No projects in this category yet.
-          </div>
+          </motion.div>
         )}
       </div>
     </Section>
