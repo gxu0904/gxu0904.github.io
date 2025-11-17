@@ -40,12 +40,12 @@ export default function LandingReactor() {
   };
 
   return (
-    <Section id="landing" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <Section id="landing" className="relative min-h-screen flex items-center justify-center overflow-hidden" noPadding>
       <div className="absolute inset-0 z-0">
         <Suspense
           fallback={
             <div className="w-full h-full flex items-center justify-center">
-              <div className="w-64 h-64 border-2 border-[var(--primary)] rounded-full animate-pulse" />
+              <div className="w-64 h-64 border-2 border-white/20 rounded-full animate-pulse" />
             </div>
           }
         >
@@ -67,7 +67,7 @@ export default function LandingReactor() {
       </div>
 
       <motion.div 
-        className="relative z-10 text-center px-4 max-w-4xl mx-auto"
+        className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-32"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ 
@@ -76,11 +76,11 @@ export default function LandingReactor() {
           delay: 0.2 
         }}
       >
-        <GlitchTitle className="mb-8 text-[var(--fg)]">
+        <GlitchTitle className="mb-6 sm:mb-8 text-[var(--fg)]">
           Designing logic, systems, and stories.
         </GlitchTitle>
         <motion.p 
-          className="text-xl sm:text-2xl text-[var(--muted)] mb-16 font-light tracking-tight"
+          className="text-lg sm:text-xl md:text-2xl text-[var(--muted)] mb-12 sm:mb-16 font-light tracking-tight leading-relaxed max-w-2xl mx-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -88,7 +88,7 @@ export default function LandingReactor() {
           Engineer. Researcher. Builder.
         </motion.p>
         <motion.div 
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
