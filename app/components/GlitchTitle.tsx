@@ -28,11 +28,11 @@ export default function GlitchTitle({ children, className = "" }: GlitchTitlePro
       const clipTop = Math.random() * 30;
       const clipBottom = 100 - Math.random() * 30;
       layers.push({
-        color: i === 0 ? "#00A8E8" : i === 1 ? "#6BE6FF" : "#00A8E8",
+        color: i === 0 ? "#FFFFFF" : i === 1 ? "#E8F0F8" : "#FFFFFF",
         clip: `inset(${clipTop}% 0 ${clipBottom}% 0)`,
         translateX: (Math.random() - 0.5) * 8,
         translateY: (Math.random() - 0.5) * 4,
-        opacity: 0.8 - i * 0.2,
+        opacity: 0.4 - i * 0.1,
       });
     }
     return layers;
