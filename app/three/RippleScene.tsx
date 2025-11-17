@@ -42,7 +42,7 @@ export default function RippleScene({ onMetricHover }: RippleSceneProps) {
       new THREE.ShaderMaterial({
         uniforms: {
           time: { value: 0 },
-          color: { value: new THREE.Color("#00A8E8") },
+          color: { value: new THREE.Color("#FFFFFF") },
         },
         vertexShader: `
           uniform float time;
@@ -109,7 +109,7 @@ export default function RippleScene({ onMetricHover }: RippleSceneProps) {
               onPointerLeave={() => onMetricHover?.(null)}
             >
               <ringGeometry args={[1 + i * 0.3, 1.2 + i * 0.3, 32]} />
-              <meshBasicMaterial color="#00A8E8" transparent opacity={0.3} />
+              <meshBasicMaterial color="#FFFFFF" transparent opacity={0.2} />
             </mesh>
           );
         })}
@@ -134,7 +134,7 @@ export default function RippleScene({ onMetricHover }: RippleSceneProps) {
         <primitive ref={materialRef} object={shaderMaterial} attach="material" />
       </instancedMesh>
       <ambientLight intensity={0.5} />
-      <pointLight position={[5, 5, 5]} intensity={0.5} color="#00A8E8" />
+      <pointLight position={[5, 5, 5]} intensity={0.4} color="#FFFFFF" />
     </>
   );
 }
