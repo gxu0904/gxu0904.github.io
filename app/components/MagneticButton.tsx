@@ -78,11 +78,12 @@ export default function MagneticButton({
       whileTap={reducedMotion ? {} : { scale: 0.98 }}
       className={cn(
         "relative inline-flex items-center justify-center px-8 py-3.5",
-        "bg-[var(--primary)] text-[var(--bg)] font-medium rounded-xl",
+        "bg-white/10 text-[var(--fg)] font-medium rounded-lg",
+        "border border-white/10",
         "transition-all duration-300 ease-out",
-        "hover:bg-[var(--accent)] hover:shadow-lg hover:shadow-[var(--primary)]/30",
+        "hover:bg-white/15 hover:border-white/20 hover:shadow-lg hover:shadow-black/20",
         "active:scale-95",
-        "focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--primary)] focus-visible:outline-offset-2",
+        "focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/30 focus-visible:outline-offset-2",
         "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100",
         "backdrop-blur-sm",
         className
