@@ -84,7 +84,7 @@ export default function CommandK({ open, onOpenChange }: CommandKProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="p-0 overflow-hidden glass-strong border-[var(--graphite)]/50 shadow-2xl">
+      <DialogContent className="p-0 overflow-hidden glass-strong border-white/10 shadow-2xl">
         <Command className="rounded-lg">
           <CommandInput
             placeholder="Type a command or search..."
