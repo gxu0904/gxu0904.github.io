@@ -1,71 +1,80 @@
-import './globals.css';
-import { JetBrains_Mono } from 'next/font/google';
-import type { Metadata } from 'next';
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-});
+import type { Metadata, Viewport } from "next";
+import "./globals.css";
+import { playfair, inter, plex } from "./fonts";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import CursorProvider from "./components/CursorProvider";
+import { personSchema, websiteSchema } from "./seo.config";
 
 export const metadata: Metadata = {
-  title: 'Grace Xu — Engineer • Builder • Operator',
-  description: 'Software engineer passionate about building products that create meaningful impact. Explore my projects and experience through an interactive terminal interface.',
-  keywords: ['Grace Xu', 'Software Engineer', 'Full Stack Developer', 'Portfolio', 'React', 'Next.js', 'TypeScript'],
-  authors: [{ name: 'Grace Xu' }],
-  creator: 'Grace Xu',
-  publisher: 'Grace Xu',
-  metadataBase: new URL('https://gxu0904.github.io'),
-  alternates: {
-    canonical: '/',
-  },
+  title: "Grace Xu — Designing logic, systems, and stories",
+  description:
+    "Engineer. Researcher. Builder. Creating systems that solve real problems—from atomic-scale material science to large-scale social impact initiatives.",
+  keywords: [
+    "Grace Xu",
+    "engineer",
+    "researcher",
+    "full-stack developer",
+    "machine learning",
+    "social impact",
+  ],
+  authors: [{ name: "Grace Xu" }],
   openGraph: {
-    title: 'Grace Xu — Engineer • Builder • Operator',
-    description: 'Software engineer passionate about building products that create meaningful impact. Explore my projects through an interactive terminal.',
-    url: 'https://gxu0904.github.io',
-    siteName: 'Grace Xu Portfolio',
-    locale: 'en_US',
-    type: 'website',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Grace Xu Portfolio',
-      },
-    ],
+    title: "Grace Xu — Designing logic, systems, and stories",
+    description:
+      "Engineer. Researcher. Builder. Creating systems that solve real problems.",
+    type: "website",
+    locale: "en_US",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Grace Xu — Engineer • Builder • Operator',
-    description: 'Software engineer passionate about building products that create meaningful impact.',
-    creator: '@gracexu',
-    images: ['/og-image.png'],
+    card: "summary_large_image",
+    title: "Grace Xu — Designing logic, systems, and stories",
+    description:
+      "Engineer. Researcher. Builder. Creating systems that solve real problems.",
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  verification: {
-    google: 'your-google-verification-code', // TODO: Add verification code
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0B132B",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${jetbrainsMono.variable} font-mono min-h-dvh bg-background text-foreground antialiased`}>
-        {children}
+    <html
+      lang="en"
+      className={`${playfair.variable} ${inter.variable} ${plex.variable}`}
+    >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
+      <body className="bg-[var(--bg)] text-[var(--fg)] antialiased">
+        <a href="#content" className="skip-link">
+          Skip to content
+        </a>
+        <CursorProvider />
+        <Header />
+        <main id="content">{children}</main>
+        <Footer />
       </body>
     </html>
   );
 }
-
 
