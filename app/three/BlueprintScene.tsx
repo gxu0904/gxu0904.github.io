@@ -36,8 +36,8 @@ export default function BlueprintScene() {
           [-5, i * gridSize, 0],
           [5, i * gridSize, 0],
         ]}
-        color="#00A8E8"
-        opacity={0.2}
+        color="#FFFFFF"
+        opacity={0.15}
         transparent
       />
     );
@@ -48,8 +48,8 @@ export default function BlueprintScene() {
           [i * gridSize, -5, 0],
           [i * gridSize, 5, 0],
         ]}
-        color="#00A8E8"
-        opacity={0.2}
+        color="#FFFFFF"
+        opacity={0.15}
         transparent
       />
     );
@@ -58,8 +58,8 @@ export default function BlueprintScene() {
   return (
     <>
       <ambientLight intensity={0.5} />
-      <pointLight position={[5, 5, 5]} intensity={0.8} color="#00A8E8" />
-      <pointLight position={[-5, -5, 5]} intensity={0.5} color="#6BE6FF" />
+      <pointLight position={[5, 5, 5]} intensity={0.6} color="#FFFFFF" />
+      <pointLight position={[-5, -5, 5]} intensity={0.3} color="#E8F0F8" />
 
       <group ref={gridRef}>{gridLines}</group>
 
@@ -80,7 +80,7 @@ export default function BlueprintScene() {
             [-1.5, 0, 0],
             [0, -1.5, 0],
           ]}
-          color="#6BE6FF"
+          color="#E8F0F8"
         />
 
         <Line
@@ -88,8 +88,8 @@ export default function BlueprintScene() {
             [-2, -2, 0],
             [2, 2, 0],
           ]}
-          color="#00A8E8"
-          opacity={0.5}
+          color="#FFFFFF"
+          opacity={0.2}
           transparent
         />
         <Line
@@ -97,8 +97,8 @@ export default function BlueprintScene() {
             [2, -2, 0],
             [-2, 2, 0],
           ]}
-          color="#00A8E8"
-          opacity={0.5}
+          color="#FFFFFF"
+          opacity={0.2}
           transparent
         />
 
@@ -114,7 +114,7 @@ export default function BlueprintScene() {
               [x - 0.3, y, 0],
               [x + 0.3, y, 0],
             ]}
-            color="#6BE6FF"
+            color="#E8F0F8"
           />
         ))}
       </group>
