@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -20,7 +21,6 @@ interface CommandKProps {
 }
 
 export default function CommandK({ open, onOpenChange }: CommandKProps) {
-
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -60,17 +60,17 @@ export default function CommandK({ open, onOpenChange }: CommandKProps) {
       items: [
         {
           label: "GitHub",
-          action: () => window.open("https://github.com/gracexu", "_blank"),
+          action: () => window.open("https://github.com", "_blank"),
           icon: Github,
         },
         {
           label: "LinkedIn",
-          action: () => window.open("https://www.linkedin.com/in/grace-xu", "_blank"),
+          action: () => window.open("https://linkedin.com", "_blank"),
           icon: Linkedin,
         },
         {
           label: "Email",
-          action: () => (window.location.href = "mailto:hello@gracexu.com"),
+          action: () => (window.location.href = "mailto:grace@example.com"),
           icon: Mail,
         },
         {
