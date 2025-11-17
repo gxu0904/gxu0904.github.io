@@ -4,6 +4,7 @@ import { playfair, inter, plex } from "./fonts";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CursorProvider from "./components/CursorProvider";
+import ScrollProgress from "./components/ScrollProgress";
 import { personSchema, websiteSchema } from "./seo.config";
 
 export const metadata: Metadata = {
@@ -42,7 +43,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#0B132B",
+  themeColor: "#0A1929",
 };
 
 export default function RootLayout({
@@ -69,6 +70,7 @@ export default function RootLayout({
         <a href="#content" className="skip-link">
           Skip to content
         </a>
+        <ScrollProgress />
         <CursorProvider />
         <Header />
         <main id="content">{children}</main>
