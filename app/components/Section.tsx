@@ -8,9 +8,15 @@ interface SectionProps {
   children: ReactNode;
   className?: string;
   id?: string;
+  noPadding?: boolean;
 }
 
-export default function Section({ children, className = "", id }: SectionProps) {
+export default function Section({ 
+  children, 
+  className = "", 
+  id,
+  noPadding = false 
+}: SectionProps) {
   return (
     <motion.section
       id={id}
@@ -18,7 +24,7 @@ export default function Section({ children, className = "", id }: SectionProps) 
       whileInView="show"
       viewport={{ once: true, margin: "-100px" }}
       variants={fadeIn}
-      className={`min-h-screen py-32 px-4 sm:px-6 lg:px-8 ${className}`}
+      className={`min-h-screen ${noPadding ? '' : 'py-24 sm:py-32'} px-4 sm:px-6 lg:px-8 ${className}`}
     >
       <div className="max-w-7xl mx-auto">{children}</div>
     </motion.section>
