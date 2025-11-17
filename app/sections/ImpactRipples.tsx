@@ -13,19 +13,19 @@ export default function ImpactRipples() {
   const [hoveredMetric, setHoveredMetric] = useState<number | null>(null);
 
   return (
-    <Section id="impact" className="py-32 relative min-h-screen flex items-center section-gradient">
+    <Section id="impact" className="py-24 relative min-h-screen flex items-center">
       <div className="absolute inset-0 z-0">
         <Suspense
           fallback={
             <div className="w-full h-full flex items-center justify-center">
-              <div className="w-64 h-64 border-2 border-[var(--primary)] rounded-full animate-pulse glow-blue" />
+              <div className="w-64 h-64 border-2 border-[var(--primary)] rounded-full animate-pulse" />
             </div>
           }
         >
           <Canvas
             camera={{ position: [0, 5, 10], fov: 50 }}
             gl={{ antialias: true, alpha: true }}
-            className="opacity-50"
+            className="opacity-40"
           >
             <RippleScene onMetricHover={setHoveredMetric} />
             <OrbitControls
@@ -40,17 +40,12 @@ export default function ImpactRipples() {
         </Suspense>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-16 items-center w-full relative z-10">
-        <div className="space-y-8">
-          <div className="inline-block mb-4">
-            <span className="px-4 py-2 rounded-full bg-[var(--primary)]/10 border border-[var(--primary)]/20 text-[var(--primary)] text-sm font-mono">
-              Social Impact
-            </span>
-          </div>
-          <h2 className="font-display text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-br from-[var(--fg)] to-[var(--muted)] bg-clip-text text-transparent">
+      <div className="grid md:grid-cols-2 gap-12 items-center w-full relative z-10">
+        <div className="space-y-6">
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
             Impact
           </h2>
-          <p className="text-lg md:text-xl text-[var(--muted)] leading-relaxed">
+          <p className="text-lg text-[var(--muted)] leading-relaxed">
             The ripple effects of systems thinking and engineering—measured in
             lives touched, communities served, and problems solved.
           </p>
@@ -65,12 +60,7 @@ export default function ImpactRipples() {
                 transition={{ delay: i * 0.1 }}
                 onMouseEnter={() => setHoveredMetric(i)}
                 onMouseLeave={() => setHoveredMetric(null)}
-                whileHover={{ scale: 1.05 }}
-                className={`glass border rounded-lg p-6 cursor-pointer transition-all ${
-                  hoveredMetric === i
-                    ? "border-[var(--primary)] shadow-lg shadow-[var(--primary)]/20"
-                    : "border-[var(--graphite)]"
-                }`}
+                className="glass border border-[var(--graphite)] rounded-lg p-6 cursor-pointer hover:border-[var(--primary)] transition-colors"
               >
                 <div className="font-mono text-xs text-[var(--muted)] mb-2 uppercase tracking-wider">
                   {metric.label}
@@ -85,26 +75,13 @@ export default function ImpactRipples() {
         </div>
 
         <div className="relative h-[500px] rounded-lg overflow-hidden glass border border-[var(--graphite)] backdrop-blur-md">
-          <div className="absolute inset-0 flex items-center justify-center p-8">
-            <div className="text-center space-y-6">
-              <motion.div
-                className="font-display text-5xl md:text-6xl font-bold text-[var(--primary)] opacity-90"
-                animate={{
-                  scale: [1, 1.05, 1],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center space-y-4">
+              <div className="font-display text-6xl font-bold text-[var(--primary)] opacity-50">
                 {metrics.reduce((sum, m) => sum + m.value, 0).toLocaleString()}
-              </motion.div>
+              </div>
               <div className="font-mono text-sm text-[var(--muted)] uppercase tracking-wider">
                 Total Impact
-              </div>
-              <div className="text-sm text-[var(--muted)] max-w-sm mx-auto">
-                The combined reach of all initiatives, representing lives improved and communities strengthened
               </div>
             </div>
           </div>
