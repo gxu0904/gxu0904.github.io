@@ -24,10 +24,10 @@ export default function ReactorScene({ mouse = { x: 0, y: 0 }, scrollY = 0 }: Re
 
   const ringConfigs = useMemo(
     () => [
-      { radius: 2, tube: 0.1, radialSegments: 32, tubularSegments: 64, color: "#00A8E8" },
-      { radius: 1.5, tube: 0.08, radialSegments: 32, tubularSegments: 64, color: "#6BE6FF" },
-      { radius: 2.5, tube: 0.12, radialSegments: 32, tubularSegments: 64, color: "#00A8E8" },
-      { radius: 1.8, tube: 0.09, radialSegments: 32, tubularSegments: 64, color: "#6BE6FF" },
+      { radius: 2, tube: 0.1, radialSegments: 32, tubularSegments: 64, color: "#5B9BD5" },
+      { radius: 1.5, tube: 0.08, radialSegments: 32, tubularSegments: 64, color: "#7DB8E8" },
+      { radius: 2.5, tube: 0.12, radialSegments: 32, tubularSegments: 64, color: "#4A8BC2" },
+      { radius: 1.8, tube: 0.09, radialSegments: 32, tubularSegments: 64, color: "#6BA3D4" },
     ],
     []
   );
@@ -73,17 +73,19 @@ export default function ReactorScene({ mouse = { x: 0, y: 0 }, scrollY = 0 }: Re
               <meshStandardMaterial
                 color={config.color}
                 emissive={config.color}
-                emissiveIntensity={0.5 + Math.abs(mouse.x) * 0.3 + Math.abs(mouse.y) * 0.2}
+                emissiveIntensity={0.3 + Math.abs(mouse.x) * 0.2 + Math.abs(mouse.y) * 0.15}
                 metalness={0.8}
                 roughness={0.2}
+                opacity={0.6}
+                transparent
               />
             </Torus>
           </group>
         );
       })}
-      <ambientLight intensity={0.3} />
-      <pointLight position={[10, 10, 10]} intensity={1} color="#00A8E8" />
-      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#6BE6FF" />
+      <ambientLight intensity={0.4} />
+      <pointLight position={[10, 10, 10]} intensity={0.8} color="#5B9BD5" />
+      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#7DB8E8" />
     </>
   );
 }
