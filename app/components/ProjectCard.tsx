@@ -27,7 +27,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         transition={{ delay: index * 0.1 }}
       >
         <Card
-          className="glass border-[var(--graphite)] cursor-pointer h-full group hover-lift transition-all duration-300 hover:border-[var(--primary)]/50"
+          className="glass border-white/10 cursor-pointer h-full group hover-lift transition-all duration-300 hover:border-white/20 glass-hover overflow-hidden"
           onClick={() => setOpen(true)}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
@@ -41,12 +41,16 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           aria-controls={`project-${project.id}`}
         >
           <div className="relative h-48 overflow-hidden rounded-t-lg">
-            <div className="w-full h-full bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] opacity-20 group-hover:opacity-30 transition-opacity" />
+            <div className="w-full h-full bg-gradient-to-br from-white/5 to-white/10 opacity-50 group-hover:opacity-70 transition-opacity duration-300" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-4xl font-display text-[var(--primary)] opacity-50">
+              <motion.span 
+                className="text-4xl md:text-5xl font-display text-[var(--fg)] opacity-30 group-hover:opacity-50 transition-opacity"
+                whileHover={{ scale: 1.05 }}
+              >
                 {project.title.charAt(0)}
-              </span>
+              </motion.span>
             </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
           <CardHeader>
             <div className="flex items-start justify-between mb-2">
@@ -84,7 +88,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       </motion.div>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-3xl glass border-[var(--graphite)] max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-3xl glass border-white/10 max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-display">{project.title}</DialogTitle>
             <DialogDescription className="text-[var(--muted)]">
@@ -92,7 +96,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-6">
-            <div className="relative h-64 rounded-lg overflow-hidden bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] opacity-20" />
+            <div className="relative h-64 rounded-lg overflow-hidden bg-gradient-to-br from-white/5 to-white/10 opacity-50" />
 
             <div>
               <h3 className="font-semibold mb-2">Summary</h3>
@@ -129,7 +133,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                   href={project.links.live} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-4 py-2 bg-[var(--primary)] hover:bg-[var(--accent)] text-[var(--bg)] rounded-lg transition-colors"
+                  className="inline-flex items-center justify-center px-4 py-2 bg-white/10 hover:bg-white/15 border border-white/10 hover:border-white/20 text-[var(--fg)] rounded-lg transition-colors"
                 >
                   <ExternalLink className="h-4 w-4 mr-2" />
                   Live Site
@@ -140,7 +144,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                   href={project.links.repo} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-4 py-2 border border-[var(--graphite)] hover:border-[var(--primary)] rounded-lg transition-colors"
+                  className="inline-flex items-center justify-center px-4 py-2 border border-white/10 hover:border-white/20 rounded-lg transition-colors text-[var(--fg)]"
                 >
                   <Github className="h-4 w-4 mr-2" />
                   Repository
@@ -151,7 +155,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                   href={project.links.doc} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-4 py-2 border border-[var(--graphite)] hover:border-[var(--primary)] rounded-lg transition-colors"
+                  className="inline-flex items-center justify-center px-4 py-2 border border-white/10 hover:border-white/20 rounded-lg transition-colors text-[var(--fg)]"
                 >
                   <FileText className="h-4 w-4 mr-2" />
                   Documentation
