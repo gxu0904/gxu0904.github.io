@@ -18,7 +18,7 @@ export default function ImpactRipples() {
         <Suspense
           fallback={
             <div className="w-full h-full flex items-center justify-center">
-              <div className="w-64 h-64 border-2 border-[var(--primary)] rounded-full animate-pulse" />
+              <div className="w-64 h-64 border-2 border-white/20 rounded-full animate-pulse" />
             </div>
           }
         >
@@ -40,17 +40,23 @@ export default function ImpactRipples() {
         </Suspense>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-12 items-center w-full relative z-10">
-        <div className="space-y-6">
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+      <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center w-full relative z-10">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="space-y-6"
+        >
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             Impact
           </h2>
-          <p className="text-lg text-[var(--muted)] leading-relaxed">
+          <p className="text-base md:text-lg text-[var(--muted)] leading-relaxed">
             The ripple effects of systems thinking and engineering—measured in
             lives touched, communities served, and problems solved.
           </p>
 
-          <div className="grid grid-cols-2 gap-4 mt-12">
+          <div className="grid grid-cols-2 gap-3 md:gap-4 mt-8 md:mt-12">
             {metrics.map((metric, i) => (
               <motion.div
                 key={i}
@@ -60,32 +66,38 @@ export default function ImpactRipples() {
                 transition={{ delay: i * 0.1 }}
                 onMouseEnter={() => setHoveredMetric(i)}
                 onMouseLeave={() => setHoveredMetric(null)}
-                className="glass border border-[var(--graphite)] rounded-lg p-6 cursor-pointer hover:border-[var(--primary)] transition-colors"
+                className="glass border border-white/10 rounded-lg p-4 md:p-6 cursor-pointer hover:border-white/20 transition-all hover-lift glass-hover"
               >
                 <div className="font-mono text-xs text-[var(--muted)] mb-2 uppercase tracking-wider">
                   {metric.label}
                 </div>
-                <div className="font-display text-3xl font-bold text-[var(--primary)]">
+                <div className="font-display text-2xl md:text-3xl font-bold text-[var(--fg)]">
                   {metric.value.toLocaleString()}
                   {metric.label.includes("$") && "+"}
                 </div>
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        <div className="relative h-[500px] rounded-lg overflow-hidden glass border border-[var(--graphite)] backdrop-blur-md">
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden glass border border-[var(--graphite)] backdrop-blur-md hover-lift"
+        >
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center space-y-4">
-              <div className="font-display text-6xl font-bold text-[var(--primary)] opacity-50">
+              <div className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--fg)] opacity-40">
                 {metrics.reduce((sum, m) => sum + m.value, 0).toLocaleString()}
               </div>
-              <div className="font-mono text-sm text-[var(--muted)] uppercase tracking-wider">
+              <div className="font-mono text-xs md:text-sm text-[var(--muted)] uppercase tracking-wider">
                 Total Impact
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <AnimatePresence>
@@ -96,7 +108,7 @@ export default function ImpactRipples() {
             exit={{ opacity: 0, y: 20 }}
             className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 max-w-md"
           >
-            <Card className="glass border-[var(--primary)]">
+            <Card className="glass border-white/20">
               <CardHeader>
                 <CardTitle className="text-lg">
                   {metrics[hoveredMetric].label}
@@ -111,7 +123,7 @@ export default function ImpactRipples() {
                     href={metrics[hoveredMetric].link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[var(--primary)] hover:underline text-sm mt-2 inline-block"
+                    className="text-[var(--fg)] hover:opacity-80 text-sm mt-2 inline-block border-b border-transparent hover:border-white/30 transition-all"
                   >
                     Learn more →
                   </a>
