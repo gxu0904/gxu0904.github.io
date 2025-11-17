@@ -22,13 +22,10 @@ export default function BlueprintScene() {
     if (reducedMotion || !linesRef.current || !gridRef.current) return;
 
     const time = state.clock.elapsedTime;
-    
-    // Subtle rotation of blueprint elements
     linesRef.current.rotation.z = Math.sin(time * 0.2) * 0.05;
     gridRef.current.rotation.z = Math.cos(time * 0.15) * 0.03;
   });
 
-  // Create grid pattern
   const gridSize = 2;
   const gridLines: React.ReactElement[] = [];
   for (let i = -5; i <= 5; i++) {
@@ -39,7 +36,7 @@ export default function BlueprintScene() {
           [-5, i * gridSize, 0],
           [5, i * gridSize, 0],
         ]}
-        color="#60A5FA"
+        color="#00A8E8"
         opacity={0.2}
         transparent
       />
@@ -51,7 +48,7 @@ export default function BlueprintScene() {
           [i * gridSize, -5, 0],
           [i * gridSize, 5, 0],
         ]}
-        color="#60A5FA"
+        color="#00A8E8"
         opacity={0.2}
         transparent
       />
@@ -61,24 +58,20 @@ export default function BlueprintScene() {
   return (
     <>
       <ambientLight intensity={0.5} />
-      <pointLight position={[5, 5, 5]} intensity={0.8} color="#60A5FA" />
-      <pointLight position={[-5, -5, 5]} intensity={0.5} color="#93C5FD" />
+      <pointLight position={[5, 5, 5]} intensity={0.8} color="#00A8E8" />
+      <pointLight position={[-5, -5, 5]} intensity={0.5} color="#6BE6FF" />
 
-      {/* Grid */}
       <group ref={gridRef}>{gridLines}</group>
 
-      {/* Blueprint circles and shapes */}
       <group ref={linesRef}>
-        {/* Main circle */}
         <Line
           points={Array.from({ length: 33 }, (_, i) => {
             const angle = (i / 32) * Math.PI * 2;
             return [Math.cos(angle) * 2, Math.sin(angle) * 2, 0];
           })}
-          color="#60A5FA"
+          color="#00A8E8"
         />
 
-        {/* Diamond shape */}
         <Line
           points={[
             [0, -1.5, 0],
@@ -87,16 +80,15 @@ export default function BlueprintScene() {
             [-1.5, 0, 0],
             [0, -1.5, 0],
           ]}
-          color="#93C5FD"
+          color="#6BE6FF"
         />
 
-        {/* Connecting lines */}
         <Line
           points={[
             [-2, -2, 0],
             [2, 2, 0],
           ]}
-          color="#60A5FA"
+          color="#00A8E8"
           opacity={0.5}
           transparent
         />
@@ -105,12 +97,11 @@ export default function BlueprintScene() {
             [2, -2, 0],
             [-2, 2, 0],
           ]}
-          color="#60A5FA"
+          color="#00A8E8"
           opacity={0.5}
           transparent
         />
 
-        {/* Corner markers */}
         {[
           [-3, -3],
           [3, -3],
@@ -123,7 +114,7 @@ export default function BlueprintScene() {
               [x - 0.3, y, 0],
               [x + 0.3, y, 0],
             ]}
-            color="#93C5FD"
+            color="#6BE6FF"
           />
         ))}
       </group>
