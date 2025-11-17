@@ -11,9 +11,6 @@ interface MagneticButtonProps {
   disabled?: boolean;
   as?: "button" | "a";
   href?: string;
-  target?: string;
-  rel?: string;
-  "aria-label"?: string;
 }
 
 export default function MagneticButton({
@@ -23,9 +20,6 @@ export default function MagneticButton({
   disabled,
   as = "button",
   href,
-  target,
-  rel,
-  "aria-label": ariaLabel,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -69,13 +63,11 @@ export default function MagneticButton({
   };
 
   const Component = as === "a" ? motion.a : motion.button;
-  const props = as === "a"
-    ? { href, target, rel: target === "_blank" ? "noopener noreferrer" : rel, "aria-label": ariaLabel }
-    : { onClick, disabled, "aria-label": ariaLabel };
+  const props = as === "a" ? { href } : { onClick, disabled };
 
   return (
     <Component
-      ref={ref as React.Ref<HTMLButtonElement & HTMLAnchorElement>}
+      ref={ref as any}
       style={{
         x: reducedMotion ? 0 : xSpring,
         y: reducedMotion ? 0 : ySpring,
