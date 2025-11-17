@@ -18,7 +18,6 @@ export default function ProjectsScene() {
     return () => mediaQuery.removeEventListener("change", handler);
   }, []);
 
-  // Create particle system
   const particleCount = 150;
   const positions = useMemo(() => {
     const positions = new Float32Array(particleCount * 3);
@@ -48,10 +47,9 @@ export default function ProjectsScene() {
   return (
     <>
       <ambientLight intensity={0.4} />
-      <pointLight position={[10, 10, 10]} intensity={0.6} color="#60A5FA" />
-      <pointLight position={[-10, -10, -10]} intensity={0.4} color="#93C5FD" />
+      <pointLight position={[10, 10, 10]} intensity={0.6} color="#00A8E8" />
+      <pointLight position={[-10, -10, -10]} intensity={0.4} color="#6BE6FF" />
 
-      {/* Particle system */}
       <points ref={particlesRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -61,14 +59,13 @@ export default function ProjectsScene() {
         </bufferGeometry>
         <pointsMaterial
           size={0.1}
-          color="#60A5FA"
+          color="#00A8E8"
           transparent
           opacity={0.6}
           sizeAttenuation={true}
         />
       </points>
 
-      {/* Network connectors */}
       <group ref={connectorsRef}>
         {Array.from({ length: 8 }).map((_, i) => {
           const angle = (i / 8) * Math.PI * 2;
@@ -85,7 +82,7 @@ export default function ProjectsScene() {
                   z,
                 ],
               ]}
-              color="#93C5FD"
+              color="#6BE6FF"
               opacity={0.3}
               transparent
             />
@@ -93,12 +90,11 @@ export default function ProjectsScene() {
         })}
       </group>
 
-      {/* Central hub */}
       <mesh position={[0, 0, 0]}>
         <octahedronGeometry args={[0.5, 0]} />
         <meshStandardMaterial
-          color="#60A5FA"
-          emissive="#60A5FA"
+          color="#00A8E8"
+          emissive="#00A8E8"
           emissiveIntensity={0.5}
           metalness={0.8}
           roughness={0.2}
