@@ -48,7 +48,7 @@ export default function CursorAura() {
           x: followerX,
           y: followerY,
           background:
-            "radial-gradient(circle at center, rgba(0,168,232,0.35), rgba(107,230,255,0.1) 45%, rgba(11,19,43,0))",
+            "radial-gradient(circle at center, rgba(255,255,255,0.08), rgba(232,240,248,0.03) 45%, rgba(10,25,41,0))",
           filter: "blur(12px)",
         }}
         initial={{ opacity: 0 }}
