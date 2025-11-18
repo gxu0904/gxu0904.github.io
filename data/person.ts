@@ -1,30 +1,37 @@
 export const person = {
   name: "Grace Xu",
-  title: "Full-Stack Developer & Product Designer",
-  location: "San Francisco, CA",
-  email: "grace@example.com",
-  github: "https://github.com/gracexu",
-  linkedin: "https://linkedin.com/in/gracexu",
+  title: "Full-Stack Developer, Software Lead & CTO",
+  location: "San Jose, CA",
+  email: "gx0794@gmail.com",
+  github: "https://github.com/gxu0904",
+  linkedin: "https://www.linkedin.com/in/grace-xu-",
+
   highlights: [
-    "Built 7+ full-stack applications serving 10K+ users",
-    "Led product design for 3 award-winning DECA projects",
-    "Research assistant in nano-grinding optimization",
-    "FIRST Robotics programming lead (2022-2023)",
+    "Software Lead for FRC Team 3256 • USACO Platinum",
+    "Co-Founder & CEO/CTO of StudyAP (5,000+ students)",
+    "Co-Lead & CTO of LightAid (17K+ donations, 750+ volunteers)",
+    "Published researcher in Materials Today Communications (2025)",
+    "ICDC 1st Place Winner — VBC Sports (2025)"
   ],
-  bio: "I'm a developer and designer passionate about building tools that make learning and productivity more accessible. From educational platforms to research tools, I love combining clean code with thoughtful UX to solve real problems.",
+
+  bio: 
+    "I'm a full-stack developer, robotics software lead, and nonprofit CTO passionate about building tools that improve learning, accessibility, and global equity. I love creating systems that combine clean engineering with thoughtful UX — from AI-powered education platforms, to assistive technology for visually impaired shoppers, to the infrastructure behind a 10+ country nonprofit. My work sits at the intersection of software, hardware, and impactful problem-solving.",
+
   skills: {
-    "Languages": ["TypeScript", "Python", "Java", "C++", "SQL"],
-    "Frontend": ["React", "Next.js", "Tailwind CSS", "Three.js"],
-    "Backend": ["Node.js", "Express", "PostgreSQL", "Firebase"],
-    "Tools": ["Git", "Figma", "Vercel", "AWS", "Docker"],
-    "Design": ["UI/UX", "Prototyping", "User Research", "A/B Testing"],
+    "Languages": ["Python", "TypeScript", "Java", "C++", "Go", "SQL"],
+    "Frontend": ["React", "Next.js", "Vue.js", "Tailwind CSS", "Three.js"],
+    "Backend": ["Node.js", "Express", "Firebase", "PostgreSQL", "MongoDB"],
+    "Tools": ["Git", "Figma", "Docker", "AWS", "Vercel"],
+    "Design": ["UI/UX Design", "Prototyping", "User Testing", "Workflow Design"]
   },
+
   timeline: [
-    { year: "2024", event: "Started Computer Science at Stanford" },
-    { year: "2023", event: "M&TSI Program - Built predictive ML models" },
-    { year: "2022", event: "Founded StudyAP - 5K+ students" },
-    { year: "2021", event: "FIRST Robotics Programming Lead" },
-  ],
+    { year: "2025", event: "ICDC Champion — VBC Sports (1st Place); Reached USACO Platinum" },
+    { year: "2024", event: "Co-founded StudyAP; Scaled LightAid to 10+ chapters; Joined DECA leadership" },
+    { year: "2023", event: "Battled Aplastic anemia, received bone marrow transplant" },
+    { year: "2022", event: "Summer: Attended COSMOS Cluster 5, created card-dealing robot final project" },
+    { year: "2021", event: "Joined FRC 3256; began competitive programming journey" }
+  ]
 } as const;
 
 export type Person = typeof person;
