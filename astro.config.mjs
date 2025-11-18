@@ -15,6 +15,7 @@ export default defineConfig({
     mdx(),
   ],
   output: 'static',
+  outDir: './out',
   build: {
     assets: 'assets'
   },
