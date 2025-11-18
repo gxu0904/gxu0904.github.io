@@ -1,0 +1,228 @@
+---
+// Animation-heavy Header with magnetic effects and scroll blur
+---
+
+<header
+  id="main-header"
+  class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 py-6 transition-all duration-500"
+  data-animate
+  style="will-change: transform, backdrop-filter; backdrop-filter: blur(0px); background: transparent;"
+>
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <!-- Logo with magnetic effect and gradient animation -->
+    <a
+      href="/"
+      class="font-display text-2xl font-bold text-[var(--fg)] hover:text-[var(--primary)] transition-all duration-300 relative"
+      data-magnetic
+      data-magnetic-strength="0.4"
+      style="will-change: transform;"
+    >
+      <span class="relative z-10">Grace Xu</span>
+      <span class="absolute inset-0 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] opacity-0 hover:opacity-10 blur-xl transition-opacity duration-300"></span>
+    </a>
+
+    <!-- Desktop Navigation with enhanced animations -->
+    <nav class="hidden md:block">
+      <ul class="flex items-center gap-10">
+        <li class="stagger-1">
+          <a
+            href="#about"
+            class="group relative text-base font-medium text-[var(--muted)] hover:text-[var(--primary)] transition-colors duration-300"
+            data-magnetic
+            data-magnetic-strength="0.25"
+            style="will-change: transform;"
+          >
+            <span class="relative z-10">About</span>
+            <span class="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left rounded-full"></span>
+            <span class="absolute inset-0 bg-[var(--primary)]/5 scale-0 group-hover:scale-100 transition-transform duration-300 rounded-lg -z-10"></span>
+          </a>
+        </li>
+        <li class="stagger-2">
+          <a
+            href="#projects"
+            class="group relative text-base font-medium text-[var(--muted)] hover:text-[var(--primary)] transition-colors duration-300"
+            data-magnetic
+            data-magnetic-strength="0.25"
+            style="will-change: transform;"
+          >
+            <span class="relative z-10">Projects</span>
+            <span class="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left rounded-full"></span>
+            <span class="absolute inset-0 bg-[var(--primary)]/5 scale-0 group-hover:scale-100 transition-transform duration-300 rounded-lg -z-10"></span>
+          </a>
+        </li>
+        <li class="stagger-3">
+          <a
+            href="#contact"
+            class="group relative px-6 py-2.5 bg-[var(--primary)] text-white font-semibold rounded-lg overflow-hidden hover-scale"
+            data-magnetic
+            data-magnetic-strength="0.3"
+            style="will-change: transform; transform-style: preserve-3d;"
+          >
+            <span class="relative z-10">Contact</span>
+            <div class="absolute inset-0 bg-gradient-to-r from-[var(--accent)] to-[var(--primary)] opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+            <div class="absolute inset-0 shimmer opacity-0 group-hover:opacity-100"></div>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Mobile menu button with enhanced animation -->
+    <button
+      id="mobile-menu-toggle"
+      class="md:hidden relative p-2.5 rounded-lg text-[var(--muted)] hover:text-[var(--primary)] hover:bg-[var(--primary)]/10 transition-all duration-300 hover-scale"
+      aria-label="Toggle menu"
+      data-magnetic
+      data-magnetic-strength="0.4"
+      style="will-change: transform;"
+    >
+      <svg class="w-6 h-6 transition-transform duration-300" id="menu-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu with slide and fade animation -->
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden mt-6 pt-6 border-t border-[var(--graphite)]/20"
+    style="will-change: opacity, transform;"
+  >
+    <nav>
+      <ul class="space-y-5">
+        <li class="reveal-from-bottom stagger-1" style="opacity: 0;">
+          <a
+            href="#about"
+            class="block text-lg font-medium text-[var(--muted)] hover:text-[var(--primary)] transition-all duration-300 py-2 px-4 rounded-lg hover:bg-[var(--primary)]/5"
+          >
+            About
+          </a>
+        </li>
+        <li class="reveal-from-bottom stagger-2" style="opacity: 0;">
+          <a
+            href="#projects"
+            class="block text-lg font-medium text-[var(--muted)] hover:text-[var(--primary)] transition-all duration-300 py-2 px-4 rounded-lg hover:bg-[var(--primary)]/5"
+          >
+            Projects
+          </a>
+        </li>
+        <li class="reveal-from-bottom stagger-3" style="opacity: 0;">
+          <a
+            href="#contact"
+            class="block text-lg font-medium text-[var(--muted)] hover:text-[var(--primary)] transition-all duration-300 py-2 px-4 rounded-lg hover:bg-[var(--primary)]/5"
+          >
+            Contact
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('main-header');
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+
+  // Enhanced scroll effect with blur
+  let lastScroll = 0;
+  let ticking = false;
+
+  function updateHeader() {
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll > 50) {
+      header!.style.backdropFilter = 'blur(20px) saturate(180%)';
+      header!.style.background = 'rgba(255, 255, 255, 0.85)';
+      header!.style.borderBottom = '1px solid rgba(30, 58, 95, 0.1)';
+      header!.style.boxShadow = '0 4px 24px rgba(0, 0, 0, 0.06)';
+    } else {
+      header!.style.backdropFilter = 'blur(0px)';
+      header!.style.background = 'transparent';
+      header!.style.borderBottom = 'none';
+      header!.style.boxShadow = 'none';
+    }
+
+    // Hide header on scroll down, show on scroll up
+    if (currentScroll > lastScroll && currentScroll > 100) {
+      header!.style.transform = 'translateY(-100%)';
+    } else {
+      header!.style.transform = 'translateY(0)';
+    }
+
+    lastScroll = currentScroll;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeader);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Mobile menu toggle with animations
+  toggle?.addEventListener('click', () => {
+    const isHidden = menu?.classList.contains('hidden');
+
+    if (isHidden) {
+      menu?.classList.remove('hidden');
+      // Animate menu items in
+      setTimeout(() => {
+        menu?.querySelectorAll('li').forEach((li) => {
+          li.classList.add('reveal-from-bottom');
+          li.style.opacity = '1';
+        });
+      }, 10);
+
+      // Animate icon to X
+      menuIcon!.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>';
+    } else {
+      menu?.querySelectorAll('li').forEach((li) => {
+        li.style.opacity = '0';
+      });
+
+      setTimeout(() => {
+        menu?.classList.add('hidden');
+      }, 300);
+
+      // Animate icon back to hamburger
+      menuIcon!.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>';
+    }
+  });
+
+  // Close mobile menu when clicking a link
+  menu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menu.querySelectorAll('li').forEach((li) => {
+        li.style.opacity = '0';
+      });
+
+      setTimeout(() => {
+        menu.classList.add('hidden');
+        menuIcon!.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>';
+      }, 300);
+    });
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href && href !== '#' && href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const headerOffset = 100;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    });
+  });
+</script>
