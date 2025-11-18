@@ -1,0 +1,384 @@
+---
+// Animation-heavy Landing section
+---
+
+<section
+  id="landing"
+  class="relative min-h-screen flex items-center justify-center bg-[var(--bg)] overflow-hidden"
+  data-gradient-mesh
+  data-floating-shapes
+  data-shape-count="8"
+>
+  <!-- Interactive particle system -->
+  <div class="absolute inset-0 pointer-events-auto" id="interactive-particles" data-particles data-particle-count="60" data-particle-color="rgba(30, 58, 95, 0.3)"></div>
+
+  <!-- Animated background grid -->
+  <div class="absolute inset-0 opacity-10 pointer-events-none" data-parallax data-speed="0.3">
+    <div class="grid-pattern w-full h-full"></div>
+  </div>
+
+  <!-- Floating gradient orbs -->
+  <div class="absolute top-10 left-10 w-96 h-96 rounded-full bg-gradient-to-br from-[var(--primary)]/15 to-transparent blur-3xl float pointer-events-none" data-parallax data-speed="0.2"></div>
+  <div class="absolute bottom-10 right-10 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-[var(--accent)]/12 to-transparent blur-3xl float pointer-events-none" data-parallax data-speed="0.35" style="animation-delay: 1.5s;"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-gradient-to-br from-[var(--primary)]/8 to-transparent blur-3xl rotate-slow pointer-events-none"></div>
+
+  <!-- Custom cursor aura -->
+  <div id="cursor-aura" class="custom-cursor">
+    <div class="cursor-dot"></div>
+  </div>
+
+  <!-- Main content -->
+  <div class="relative z-10 text-center max-w-5xl mx-auto px-4 perspective-1000 pointer-events-none">
+    <!-- Animated title -->
+    <h1 class="mb-8 md:mb-12" data-animate>
+      <div class="relative inline-block w-full overflow-visible">
+        <div class="flex items-center justify-center gap-3 sm:gap-6 md:gap-8 lg:gap-12 xl:gap-16 whitespace-nowrap">
+          <!-- First name -->
+          <div class="relative inline-block name-container">
+            <span
+              id="first-name"
+              class="font-display text-[14vw] sm:text-[13vw] md:text-[12vw] lg:text-[11vw] xl:text-[10vw] font-bold text-[var(--fg)] leading-none tracking-tight uppercase"
+              style="transform-origin: center; will-change: transform, opacity; opacity: 0;"
+            >
+              Grace
+            </span>
+          </div>
+
+          <!-- Last name with gradient -->
+          <div class="relative inline-block name-container">
+            <span
+              id="last-name"
+              class="font-display text-[14vw] sm:text-[13vw] md:text-[12vw] lg:text-[11vw] xl:text-[10vw] font-bold leading-none tracking-tight uppercase"
+              style="transform-origin: center; will-change: transform, opacity; opacity: 0;"
+            >
+              Xu
+            </span>
+            <div class="absolute inset-0 bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--primary)] bg-[length:200%_100%] animate-gradient-flow opacity-70 bg-clip-text text-transparent mix-blend-multiply pointer-events-none"></div>
+          </div>
+        </div>
+      </div>
+    </h1>
+
+    <!-- Animated subtitle -->
+    <div class="mb-16" data-animate style="animation-delay: 0.4s;">
+      <p class="text-2xl md:text-3xl lg:text-4xl text-[var(--muted)] font-light" data-char-reveal style="will-change: transform, opacity;">
+        Engineer. Researcher. Builder.
+      </p>
+    </div>
+
+    <!-- CTA buttons -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-32 pointer-events-auto" data-animate style="animation-delay: 0.6s;">
+      <a
+        href="#projects"
+        class="group relative px-10 py-4 bg-[var(--primary)] text-[var(--bg)] font-semibold rounded-xl overflow-hidden hover-scale pulse-glow interactive-button"
+        data-magnetic
+        data-magnetic-strength="0.5"
+        data-hover-lift
+        style="will-change: transform;"
+      >
+        <span class="relative z-10 flex items-center gap-2">
+          View Work
+          <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </span>
+        <div class="absolute inset-0 bg-gradient-to-r from-[var(--accent)] to-[var(--primary)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div class="absolute top-0 left-0 w-full h-full shimmer"></div>
+        </div>
+      </a>
+
+      <a
+        href="#contact"
+        class="group relative px-10 py-4 glass-morphism text-[var(--primary)] font-semibold rounded-xl overflow-hidden hover-scale interactive-button"
+        data-magnetic
+        data-magnetic-strength="0.5"
+        data-hover-lift
+        style="will-change: transform; border: 1px solid rgba(30, 58, 95, 0.2);"
+      >
+        <span class="relative z-10 flex items-center gap-2">
+          Get In Touch
+          <svg class="w-5 h-5 transform group-hover:rotate-45 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </span>
+        <div class="absolute inset-0 bg-[var(--primary)]/10 transform scale-0 group-hover:scale-100 transition-transform duration-500 rounded-xl"></div>
+      </a>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-auto" data-animate style="animation-delay: 0.8s;">
+      <a
+        href="#about"
+        class="flex flex-col items-center gap-3 text-[var(--muted)] hover:text-[var(--primary)] transition-all duration-300 group"
+        data-magnetic
+        data-magnetic-strength="0.3"
+      >
+        <span class="text-sm font-medium tracking-wide uppercase">Scroll</span>
+        <div class="relative">
+          <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+          </svg>
+          <div class="absolute inset-0 w-6 h-6 bg-[var(--primary)]/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid-pattern {
+    background-image:
+      linear-gradient(to right, rgba(30, 58, 95, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(30, 58, 95, 0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridMove 30s linear infinite;
+  }
+
+  @keyframes gridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 60px; }
+  }
+
+  /* Flowing gradient animation */
+  @keyframes gradient-flow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .animate-gradient-flow {
+    animation: gradient-flow 4s ease infinite;
+  }
+
+  /* Name container */
+  .name-container {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  /* Letter styling */
+  .letter {
+    display: inline-block;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    pointer-events: auto;
+  }
+
+  /* Letter hover effects */
+  .letter:nth-child(1):hover { animation: letterRotate 0.6s ease; }
+  .letter:nth-child(2):hover { animation: letterScale 0.6s ease; }
+  .letter:nth-child(3):hover { animation: letterFlip 0.6s ease; }
+  .letter:nth-child(4):hover { animation: letterWobble 0.6s ease; }
+  .letter:nth-child(5):hover { animation: letterElastic 0.6s ease; }
+  .letter:nth-child(6):hover { animation: letterBounce 0.6s ease; }
+  .letter:nth-child(7):hover { animation: letterRotate 0.6s ease; }
+
+  @keyframes letterBounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    25% { transform: translateY(-30px) scale(1.15); }
+    50% { transform: translateY(-15px) scale(1.08); }
+    75% { transform: translateY(-25px) scale(1.12); }
+  }
+
+  @keyframes letterRotate {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(20deg) scale(1.2); }
+    50% { transform: rotate(-15deg) scale(1.15); }
+    75% { transform: rotate(12deg) scale(1.18); }
+  }
+
+  @keyframes letterScale {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.4) rotate(8deg); }
+  }
+
+  @keyframes letterFlip {
+    0%, 100% { transform: rotateY(0deg); }
+    50% { transform: rotateY(180deg) scale(1.3); }
+  }
+
+  @keyframes letterWobble {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(-15px) rotate(-8deg); }
+    50% { transform: translateX(15px) rotate(8deg); }
+    75% { transform: translateX(-8px) rotate(-5deg); }
+  }
+
+  @keyframes letterElastic {
+    0%, 100% { transform: scale(1, 1); }
+    25% { transform: scale(1.3, 0.7); }
+    50% { transform: scale(0.7, 1.3); }
+    75% { transform: scale(1.2, 0.9); }
+  }
+
+  /* Rainbow effect on click */
+  .letter.rainbow {
+    background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    background-size: 300% 300%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow 2s linear infinite;
+  }
+
+  @keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+
+  /* Letter glow effect */
+  .letter-glow {
+    filter: drop-shadow(0 0 10px rgba(30, 58, 95, 0.5))
+            drop-shadow(0 0 20px rgba(30, 58, 95, 0.3))
+            drop-shadow(0 0 30px rgba(30, 58, 95, 0.1));
+  }
+
+  /* Button effects */
+  .interactive-button {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .interactive-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .interactive-button:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* Focus states */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href && href !== '#' && href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const headerOffset = 100;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    });
+  });
+
+  // Name animation
+  function initNameEffects() {
+    const firstName = document.getElementById('first-name');
+    const lastName = document.getElementById('last-name');
+
+    if (!firstName || !lastName) return;
+
+    // Fade in names
+    gsap.to([firstName, lastName], {
+      opacity: 1,
+      duration: 0.8,
+      ease: "power2.out",
+      stagger: 0.2
+    });
+
+    // Split into interactive letters
+    setTimeout(() => {
+      function splitIntoLetters(element) {
+        const text = element.textContent;
+        element.innerHTML = '';
+
+        text.split('').forEach((char) => {
+          const span = document.createElement('span');
+          span.textContent = char;
+          span.className = 'letter';
+          span.style.display = 'inline-block';
+          span.style.transformOrigin = 'center';
+          element.appendChild(span);
+        });
+
+        return element.querySelectorAll('.letter');
+      }
+
+      const firstNameLetters = splitIntoLetters(firstName);
+      const lastNameLetters = splitIntoLetters(lastName);
+
+      // Setup letter interactions
+      function setupLetterInteractions(letters) {
+        letters.forEach((letter) => {
+          letter.style.pointerEvents = 'auto';
+          letter.style.cursor = 'pointer';
+
+          // Glow on hover
+          letter.addEventListener('mouseenter', () => {
+            letter.classList.add('letter-glow');
+          });
+
+          letter.addEventListener('mouseleave', () => {
+            letter.classList.remove('letter-glow');
+          });
+
+          // Rainbow effect on click
+          letter.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            letter.classList.add('rainbow');
+            setTimeout(() => letter.classList.remove('rainbow'), 2000);
+          });
+        });
+      }
+
+      setupLetterInteractions(firstNameLetters);
+      setupLetterInteractions(lastNameLetters);
+
+      // Subtle wave animation
+      function waveAnimation(letters, delay = 0) {
+        letters.forEach((letter, index) => {
+          gsap.to(letter, {
+            y: -15,
+            duration: 0.4,
+            delay: delay + index * 0.08,
+            ease: "power2.inOut",
+            yoyo: true,
+            repeat: -1,
+            repeatDelay: 1.5
+          });
+        });
+      }
+
+      setTimeout(() => {
+        waveAnimation(firstNameLetters, 0);
+        waveAnimation(lastNameLetters, 0.3);
+      }, 800);
+    }, 500);
+  }
+
+  // Initialize
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNameEffects);
+  } else {
+    initNameEffects();
+  }
+</script>
