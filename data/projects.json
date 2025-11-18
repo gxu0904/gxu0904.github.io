@@ -4,15 +4,15 @@
     "name": "StudyAP",
     "tagline": "AI-powered study platform for AP students",
     "stack": ["Next.js", "TypeScript", "OpenAI API", "PostgreSQL", "Tailwind"],
-    "year": 2022,
-    "role": "Founder & Lead Developer",
-    "description": "Comprehensive study platform with AI-generated practice questions, spaced repetition, and progress tracking for AP exam preparation.",
+    "year": 2024,
+    "role": "Co-Founder & CEO/CTO",
+    "description": "AI-driven platform that generates personalized AP study materials, adaptive practice questions, and structured review systems for students across the U.S.",
     "highlights": [
-      "Grew to 5,000+ active students across 12 AP subjects",
-      "Generated 50K+ AI practice questions with 94% accuracy rating",
-      "Built adaptive learning algorithm improving retention by 37%",
-      "Implemented OAuth and payment integration with Stripe",
-      "Optimized database queries reducing load time by 65%"
+      "Co-founded and built platform serving 5,000+ students across 12 AP subjects",
+      "Generated 50K+ AI practice questions with a 94% accuracy rating",
+      "Developed adaptive learning algorithm improving user retention by 37%",
+      "Implemented authentication, analytics dashboards, and secure billing with Stripe",
+      "Optimized backend and database performance reducing load times by 65%"
     ],
     "metrics": [
       { "label": "Active Users", "value": "5,000+" },
@@ -20,133 +20,106 @@
       { "label": "Avg. Score Improvement", "value": "+23%" }
     ],
     "links": {
-      "demo": "https://studyap.example.com",
-      "repo": "https://github.com/gracexu/studyap"
+      "demo": "https://studyap.org",
+      "repo": "https://github.com/gxu0904"
     },
     "image": "/images/studyap-preview.png"
   },
   {
     "slug": "lightaid",
     "name": "LightAid",
-    "tagline": "Disaster relief coordination platform",
-    "stack": ["React", "Firebase", "Google Maps API", "Material-UI"],
-    "year": 2023,
-    "role": "Full-Stack Developer",
-    "description": "Real-time platform connecting disaster victims with relief organizations, featuring location-based matching and resource tracking.",
+    "tagline": "Global nonprofit combating light, period, and learning poverty",
+    "stack": ["React", "Firebase", "Google Maps API", "Material-UI", "Twilio"],
+    "year": 2024,
+    "role": "Co-Lead & CTO",
+    "description": "Technology infrastructure powering LightAid’s global impact, connecting international chapters, volunteers, and donation pipelines in real time.",
     "highlights": [
-      "Won 1st place at DECA Internationals 2023",
-      "Real-time geolocation matching using Google Maps API",
-      "Built admin dashboard for 15+ relief organizations",
-      "Implemented SMS notifications via Twilio integration",
-      "Designed mobile-first UI tested with 50+ users"
+      "Scaled nonprofit to 17K+ donations and 750+ volunteers across 10+ international chapters",
+      "Designed and maintained operational platforms for logistics, chapter coordination, and outreach",
+      "Built tooling for international communication including SMS alerts and real-time dashboards",
+      "Supported initiatives impacting 10K+ people across China, Chile, and Mexico",
+      "Recipient of multiple DECA and entrepreneurship recognitions"
     ],
     "metrics": [
-      { "label": "Relief Orgs", "value": "15+" },
-      { "label": "DECA Placement", "value": "1st" },
-      { "label": "User Testing", "value": "50+ users" }
+      { "label": "Donations", "value": "17K+" },
+      { "label": "People Impacted", "value": "10K+" },
+      { "label": "Volunteers", "value": "750+" },
+      { "label": "Chapters", "value": "10+" },
+      { "label": "Funds Raised", "value": "$4K+" }
     ],
     "links": {
-      "demo": "https://lightaid.example.com",
-      "repo": "https://github.com/gracexu/lightaid"
+      "demo": "https://lightaid.net",
+      "repo": "https://github.com/gxu0904"
     },
     "image": "/images/lightaid-preview.png"
   },
   {
     "slug": "frc-scouting",
-    "name": "FRC Scouting System",
-    "tagline": "Data analytics for robotics competitions",
-    "stack": ["Python", "Flask", "SQLite", "Chart.js", "Bootstrap"],
+    "name": "FRC Software Lead",
+    "tagline": "Robot control & subsystem development for FRC Team 3256",
+    "stack": ["Java", "WPILib", "PathPlanner", "PhotonVision"],
     "year": 2022,
-    "role": "Programming Lead",
-    "description": "Competition scouting app for FIRST Robotics team to track match data, analyze opponent strategies, and optimize alliance selections.",
+    "role": "Software Lead",
+    "description": "Lead developer for FRC Team 3256’s robot software, contributing to subsystem architecture, autonomous routines, vision integration, and superstructure control.",
     "highlights": [
-      "Collected data on 60+ teams across 8 competitions",
-      "Built predictive model with 78% match outcome accuracy",
-      "Real-time data sync across 6 scout tablets",
-      "Generated automated match strategy reports",
-      "Contributed to team's qualification for World Championship"
-    ],
-    "metrics": [
-      { "label": "Teams Tracked", "value": "60+" },
-      { "label": "Matches Analyzed", "value": "200+" },
-      { "label": "Prediction Accuracy", "value": "78%" }
+      "Developed and maintained robot subsystems including drivetrain, intake, shooter, and climber",
+      "Implemented autonomous routines using PathPlanner and trajectory following",
+      "Integrated AprilTag and object detection pipelines using PhotonVision",
+      "Helped design superstructure state machine for coordinated scoring actions",
+      "Collaborated with electrical and mechanical teams to ensure smooth system integration"
     ],
     "links": {
-      "repo": "https://github.com/gracexu/frc-scouting"
+      "repo": "https://github.com/Team3256"
     },
     "image": "/images/frc-preview.png"
   },
   {
-    "slug": "deca-fintech",
-    "name": "DECA FinTech Simulator",
-    "tagline": "Financial literacy game for high schoolers",
-    "stack": ["Vue.js", "Node.js", "Express", "MongoDB", "D3.js"],
-    "year": 2023,
-    "role": "Lead Developer & UX Designer",
-    "description": "Interactive simulation teaching investment strategies, budgeting, and financial decision-making through gamified scenarios.",
+    "slug": "mtsi-insight",
+    "name": "InSight",
+    "tagline": "Cart-mounted navigation device for visually impaired shoppers",
+    "stack": ["Python", "Arduino", "OpenCV", "Ultrasonic Sensors"],
+    "year": 2025,
+    "role": "Lead Engineer (M&TSI Final Project)",
+    "description": "Assistive device mounted on shopping carts that provides auditory and haptic navigation guidance for visually impaired shoppers, developed as the capstone project for UPenn’s Management & Technology Summer Institute.",
     "highlights": [
-      "Finalist at DECA Nationals 2023 (Top 10)",
-      "Designed 12 interactive financial scenarios",
-      "Built real-time stock market simulation with historical data",
-      "Implemented achievement system and leaderboards",
-      "Created comprehensive onboarding flow (15% completion rate → 67%)"
+      "Engineered embedded system integrating sensors for obstacle detection",
+      "Designed multimodal feedback combining haptics, audio cues, and route guidance",
+      "Conducted user testing simulations to refine ergonomics and feedback latency",
+      "Presented to Wharton and Penn Engineering faculty during M&TSI showcase",
+      "Produced full technical documentation and business feasibility analysis"
     ],
     "metrics": [
-      { "label": "DECA Nationals", "value": "Top 10" },
-      { "label": "Scenarios", "value": "12" },
-      { "label": "Completion Rate", "value": "67%" }
+      { "label": "Obstacle Detection Accuracy", "value": "96%" },
+      { "label": "Latency", "value": "<150ms" }
     ],
     "links": {
-      "demo": "https://deca-fintech.example.com"
+      "demo": "https://devpost.com/software/insight-1yf9or"
     },
-    "image": "/images/deca-preview.png"
-  },
-  {
-    "slug": "mtsi-ml",
-    "name": "M&TSI Predictive Model",
-    "tagline": "ML model for urban traffic optimization",
-    "stack": ["Python", "TensorFlow", "Pandas", "Scikit-learn", "Jupyter"],
-    "year": 2023,
-    "role": "Research Intern",
-    "description": "Machine learning project predicting traffic congestion patterns to optimize signal timing in urban intersections.",
-    "highlights": [
-      "Trained on 2.3M data points from city traffic sensors",
-      "Achieved 91% prediction accuracy using ensemble methods",
-      "Reduced model inference time by 43% through optimization",
-      "Presented findings to MIT faculty and industry partners",
-      "Published technical report with actionable recommendations"
-    ],
-    "metrics": [
-      { "label": "Data Points", "value": "2.3M" },
-      { "label": "Accuracy", "value": "91%" },
-      { "label": "Speed Improvement", "value": "43%" }
-    ],
-    "links": {
-      "repo": "https://github.com/gracexu/mtsi-traffic-ml"
-    },
-    "image": "/images/mtsi-preview.png"
+    "image": "/images/insight-preview.png"
   },
   {
     "slug": "nano-grinding",
     "name": "Nano-Grinding Research",
-    "tagline": "Optimization tool for precision manufacturing",
+    "tagline": "Optimization tool for precision semiconductor manufacturing",
     "stack": ["MATLAB", "Python", "NumPy", "SciPy", "Matplotlib"],
     "year": 2024,
     "role": "Research Assistant",
-    "description": "Computational tool analyzing nano-scale grinding parameters to optimize surface finish quality in semiconductor manufacturing.",
+    "description": "Computational framework analyzing nano-scale grinding simulations to identify optimal manufacturing parameters. Research peer-reviewed and published.",
     "highlights": [
-      "Analyzed 15K+ grinding simulations across 8 parameter dimensions",
-      "Identified optimal parameter ranges improving finish quality by 28%",
+      "Analyzed 15K+ simulations across 8 grinding parameters",
+      "Identified optimal ranges improving surface finish quality by 28%",
       "Developed visualization dashboard for multi-objective optimization",
-      "Co-authored paper submitted to ASME Manufacturing Conference",
-      "Reduced experimental trial time by 60% through simulation"
+      "Co-authored published research paper (Materials Today Communications, 2025)",
+      "Reduced required physical trials by ~60% through modeling"
     ],
     "metrics": [
       { "label": "Simulations", "value": "15K+" },
-      { "label": "Quality Improvement", "value": "28%" },
-      { "label": "Time Saved", "value": "60%" }
+      { "label": "Surface Quality Improvement", "value": "28%" },
+      { "label": "Experimental Time Saved", "value": "60%" }
     ],
-    "links": {},
+    "links": {
+      "paper": "https://doi.org/10.1016/j.mtcomm.2025.112916"
+    },
     "image": "/images/nano-preview.png"
   },
   {
@@ -156,13 +129,13 @@
     "stack": ["Next.js", "Three.js", "React Three Fiber", "Framer Motion", "GLSL"],
     "year": 2023,
     "role": "Solo Developer & Designer",
-    "description": "Immersive 3D portfolio featuring interactive models, shader effects, and smooth animations to showcase projects.",
+    "description": "Immersive 3D portfolio featuring interactive scenes, shader effects, and animated transitions to showcase projects and engineering work.",
     "highlights": [
-      "Built custom 3D scene with 6 interactive project exhibits",
-      "Implemented GLSL shaders for realistic lighting and materials",
-      "Optimized to 60fps on mobile through instancing and LOD",
-      "Designed minimalist UI with accessibility in mind (WCAG AA)",
-      "Lighthouse score: 98 Performance, 100 Accessibility"
+      "Built custom 3D scene with 6 interactive project showcases",
+      "Implemented GLSL shaders for physically-based lighting and effects",
+      "Optimized performance to maintain 60fps on mobile devices",
+      "Designed minimalist but expressive UI following WCAG AA standards",
+      "Achieved Lighthouse scores of 98 Performance & 100 Accessibility"
     ],
     "metrics": [
       { "label": "Performance", "value": "98" },
@@ -170,8 +143,8 @@
       { "label": "Mobile FPS", "value": "60" }
     ],
     "links": {
-      "demo": "https://grace-xu-v1.vercel.app",
-      "repo": "https://github.com/gracexu/portfolio-v1"
+      "demo": "https://grace-xu.com",
+      "repo": "https://github.com/gxu0904/gxu0904.github.io"
     },
     "image": "/images/portfolio-preview.png"
   }
