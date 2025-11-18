@@ -1,77 +1,88 @@
-# Grace Xu
-Full-Stack Developer & Product Designer
+# Grace Xu  
+Full-Stack Developer & Product Designer  
 
-grace@example.com | San Francisco, CA
+grace.xu@warriorlife.net | 21gracexu@gmail.com | San Jose, CA  
 github.com/gracexu | linkedin.com/in/gracexu
 
 ## Education
 
-**Stanford University** | Stanford, CA | 2024 - Present
-Bachelor of Science in Computer Science
-Relevant Coursework: Data Structures, Algorithms, HCI, Machine Learning
+**Valley Christian High School (VCHS)** | San Jose, CA | Expected June 2026  
+- Cumulative GPA: 4.0 (UW), 4.54 (W)  
+- SAT: 1550 (RW 750, Math 800)  
+- AP Scholar with Distinction (2024)  
+- AP Coursework: APUSH (5), AP Physics C: Mechanics (5), AP Physics C: E&M (5), AP Calculus BC (5), AP CS A (5), AP Human Geography (5), AP Physics 1 (5), AP Chinese (5)
+
+**Management & Technology Summer Institute (M&TSI)** | Penn Engineering & Wharton | July 2025  
+- 3-week program at the intersection of engineering, business, and technology  
+- Final Project: *InSight* — smart cart-mounted guidance device for visually impaired shoppers
+
+**COSMOS, UC Davis** | Cluster 5: Computers in Biophysics & Robotics | Summer 2022  
+- Final Project: Built a card-dealing robot using LEGO EV3 and presented to faculty
 
 ## Experience
 
-**Nano-Grinding Research Assistant** | University Lab | 2024
-- Developed MATLAB/Python tools for analyzing 15K+ nano-scale grinding simulations
-- Identified optimal parameter ranges improving surface finish quality by 28%
-- Created interactive visualization dashboard for multi-objective optimization
-- Co-authored research paper submitted to ASME Manufacturing Conference
+**Software Lead — FIRST Robotics Competition, Team 3256** | 2021–Present  
+- Led 5-member software team developing autonomous, vision, and control systems  
+- Built key subsystems for the 2024 & 2025 competition robots  
+- Implemented robust auto routines and real-time control logic for competition play  
+- Previously part of fabrication team building mechanical components (2021–2022)
 
-**M&TSI Research Intern** | MIT | Summer 2023
-- Built ML model predicting urban traffic congestion with 91% accuracy
-- Trained on 2.3M data points from city traffic sensors using ensemble methods
-- Reduced model inference time by 43% through optimization techniques
-- Presented findings to MIT faculty and industry partners
+**VP of Operations & Mentor — DECA Chapter** | 2023–Present  
+- Managed operations for 200+ member chapter  
+- Built automation tools including Python score tabulator, Go event scheduler, and C++ roommate matcher  
+- Mentored 30+ competitors at conferences and competitions  
 
-**Programming Lead** | FIRST Robotics Team | 2022 - 2023
-- Led development of competition scouting system tracking 60+ teams
-- Built predictive model achieving 78% match outcome accuracy
-- Implemented real-time data sync across 6 scout tablets
-- Contributed to team qualification for World Championship
+**Co-Founder & Technical Lead — StudyAP** | 2023–Present  
+- Built platform using AI to generate standardized-test study resources  
+- Designed backend architecture, question generator pipeline, and UI/UX workflow
+
+**Co-Lead & CTO — LightAid (501(c)(3))** | 2023–Present  
+- Scaled international nonprofit addressing light, period, and learning poverty  
+- Impact: 17,000+ donations, 10,000+ people served, 750+ volunteers, 10+ chapters  
+- Built and maintained organizational tech infrastructure
 
 ## Projects
 
-**StudyAP** | Founder & Lead Developer | 2022 - Present
-- AI-powered study platform serving 5,000+ students across 12 AP subjects
-- Generated 50K+ practice questions with 94% accuracy rating using OpenAI API
-- Built adaptive learning algorithm improving user retention by 37%
-- Tech: Next.js, TypeScript, PostgreSQL, OpenAI API, Tailwind CSS
+**VCMC Automation Tools Suite** | Developer | 2023–Present  
+- Python score tabulator used by 200+ students during competitions  
+- Go-based event scheduler reducing scheduling time by 85%  
+- C++ roommate-matching system optimizing 100+ room assignments
 
-**LightAid** | Full-Stack Developer | 2023
-- Disaster relief platform connecting victims with organizations (DECA Intl. 1st Place)
-- Real-time geolocation matching using Google Maps API
-- Built admin dashboard for 15+ relief organizations with SMS notifications
-- Tech: React, Firebase, Google Maps API, Twilio, Material-UI
+**Global Youth Entrepreneurship Challenge — DE:CODE Application** | 2024  
+- Built platform simplifying news and integrating learning for underserved communities  
+- Achieved Top 3 North America Finalist recognition
 
-**DECA FinTech Simulator** | Lead Developer & UX Designer | 2023
-- Financial literacy game for high school students (DECA Nationals Top 10)
-- 12 interactive scenarios teaching investment strategies and budgeting
-- Real-time stock market simulation with historical data integration
-- Improved onboarding completion rate from 15% to 67% through UX redesign
-- Tech: Vue.js, Node.js, Express, MongoDB, D3.js
+**Card-Dealing Robot** | COSMOS Final Project | 2022  
+- Programmed EV3 robot to autonomously shuffle and deal cards  
+- Integrated sensors, basic CV logic, and mechanical design constraints
 
 ## Technical Skills
 
-**Languages:** TypeScript, Python, Java, C++, SQL, MATLAB
-**Frontend:** React, Next.js, Vue.js, Tailwind CSS, Three.js, Framer Motion
-**Backend:** Node.js, Express, PostgreSQL, MongoDB, Firebase
-**Tools:** Git, Docker, AWS, Vercel, Figma, Jest
-**Design:** UI/UX Design, Prototyping, User Research, A/B Testing
+**Languages:** Python, Java, TypeScript, C++, Go, SQL  
+**Frontend:** React, Next.js, Vue.js, Tailwind CSS  
+**Backend:** Node.js, Express, Firebase, PostgreSQL, MongoDB  
+**Tools:** Git, Docker, AWS, Vercel, Figma  
+**Other:** Robotics (WPILib), Vision Systems, Automation Tools, UI/UX Design
 
 ## Awards & Recognition
 
-- DECA International Career Development Conference - 1st Place (2023)
-- DECA Nationals - Top 10 Finalist (2023)
-- FIRST Robotics World Championship Qualifier (2023)
-- AP Scholar with Distinction
+- **ICDC Winner — 1st Place, VBC Sports (DECA), 2025**  
+- **ICDC Qualifier — 2nd Place, VBC Sports (Western Region), 2024**  
+- **DE:CODE Top 3 NA Finalist**, Global Youth Entrepreneurship Challenge (2024)  
+- **SCDC Finalist — 5th Place Principles of Finance**, DECA (2024)  
+- **SCDC Finalist — 8th Place Finance Consulting**, DECA (2024)  
+- **USACO Platinum Division** (2025)  
+- **USACO Gold Division** (2023)  
+- **FRC Creativity Award**, World Championship Daly Division (2025)  
+- **FRC Engineering Inspiration Award**, SF Regional (2025)  
+- **FRC Excellence in Engineering Award**, Contra Costa Regional (2025)  
+- Multiple additional regional and division awards (2022–2025)
 
 ## Leadership
 
-- DECA Chapter President (2023-2024)
-- Robotics Team Programming Lead (2022-2023)
-- Code Club Mentor - Teaching Python to middle school students
+- **DECA VP of Operations & Mentor** (2023–Present)  
+- **FRC Team 3256 Programming Lead** (2024–Present)  
+- **Co-Founder & CTO, LightAid Nonprofit** (2023–Present)  
+- **Co-Candidate, LLS Visionaries of the Year Campaign** — Raised $12K+ (2023–2024)
 
 ---
-
-References available upon request
