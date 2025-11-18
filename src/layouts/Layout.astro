@@ -1,0 +1,78 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Engineer. Researcher. Builder. Creating systems that solve real problems—from atomic-scale material science to large-scale social impact initiatives." } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Grace Xu, engineer, researcher, full-stack developer, machine learning, social impact" />
+    <meta name="author" content="Grace Xu" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- Preload critical fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Grace Xu",
+        "url": "https://gracexu.dev",
+        "jobTitle": "Software Engineer",
+        "knowsAbout": ["Machine Learning", "Full-Stack Development", "Research"]
+      }
+    </script>
+
+    <!-- Enhanced animation system initialization -->
+    <script>
+      // Set CSS custom properties for animations
+      document.documentElement.style.setProperty('--font-display', '"Playfair Display", serif');
+      document.documentElement.style.setProperty('--font-sans', 'Inter, sans-serif');
+      document.documentElement.style.setProperty('--font-mono', '"IBM Plex Mono", monospace');
+    </script>
+  </head>
+  <body class="bg-[var(--bg)] text-[var(--fg)] antialiased">
+    <!-- Skip to content link for accessibility -->
+    <a href="#content" class="skip-link">
+      Skip to content
+    </a>
+
+    <!-- Main content -->
+    <main id="content" class="relative">
+      <slot />
+    </main>
+
+    <!-- Enhanced smooth scroll with Lenis -->
+    <script>
+      import '../lib/animationMaster.js';
+    </script>
+  </body>
+</html>
