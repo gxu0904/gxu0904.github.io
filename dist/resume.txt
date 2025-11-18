@@ -1,0 +1,18 @@
+# Grace Xu
+
+**Engineer • Builder • Operator**
+San Jose, CA | grace@example.com | github.com/gxu0904
+
+This is a placeholder PDF. You can replace this with your actual resume PDF.
+
+To generate a PDF from resume.md, you can use tools like:
+- pandoc: `pandoc data/resume.md -o public/resume.pdf`
+- Online converters: markdown-to-pdf.com
+- Browser print: Open resume.md in a markdown viewer and print to PDF
+
+---
+
+## Education
+
+**B.S. Computer Science** (Expected 2025)
+University of California, Santa Cruz
