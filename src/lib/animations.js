@@ -43,7 +43,7 @@ export class ParallaxController {
   }
 }
 
-// Advanced magnetic attraction system
+// Advanced magnetic attraction system - Enhanced for better cursor interaction
 export class MagneticSystem {
   constructor() {
     this.elements = [];
@@ -52,34 +52,46 @@ export class MagneticSystem {
 
   init() {
     document.querySelectorAll('[data-magnetic]').forEach(el => {
-      const strength = parseFloat(el.dataset.magneticStrength || 0.3);
-      const distance = parseFloat(el.dataset.magneticDistance || 100);
+      const strength = parseFloat(el.dataset.magneticStrength || 0.4);
+      const distance = parseFloat(el.dataset.magneticDistance || 120);
 
       this.setupMagneticEffect(el, strength, distance);
     });
   }
 
-  setupMagneticEffect(element, strength = 0.3, maxDistance = 100) {
+  setupMagneticEffect(element, strength = 0.4, maxDistance = 120) {
     let isHovering = false;
+    let currentX = 0;
+    let currentY = 0;
 
     element.addEventListener('mouseenter', () => {
       isHovering = true;
       gsap.to(element, {
-        scale: 1.05,
-        duration: 0.3,
+        scale: 1.08,
+        duration: 0.25,
         ease: "power2.out"
       });
+      
+      // Add subtle glow effect
+      element.style.transition = 'box-shadow 0.25s ease-out';
+      element.style.boxShadow = '0 8px 24px rgba(91, 155, 213, 0.2)';
     });
 
     element.addEventListener('mouseleave', () => {
       isHovering = false;
+      currentX = 0;
+      currentY = 0;
+      
       gsap.to(element, {
         x: 0,
         y: 0,
         scale: 1,
-        duration: 0.8,
-        ease: "elastic.out(1, 0.3)"
+        duration: 0.6,
+        ease: "elastic.out(1, 0.4)"
       });
+      
+      // Remove glow effect
+      element.style.boxShadow = '';
     });
 
     element.addEventListener('mousemove', (e) => {
@@ -94,15 +106,31 @@ export class MagneticSystem {
 
       const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
       const normalizedDistance = Math.min(distance / maxDistance, 1);
+      
+      // Enhanced magnetic formula with smoother falloff
+      const falloff = 1 - normalizedDistance;
+      const magneticStrength = strength * falloff * falloff; // Quadratic falloff for smoother effect
 
-      const x = deltaX * strength * (1 - normalizedDistance);
-      const y = deltaY * strength * (1 - normalizedDistance);
+      const targetX = deltaX * magneticStrength;
+      const targetY = deltaY * magneticStrength;
+      
+      // Smooth interpolation for buttery smooth movement
+      currentX += (targetX - currentX) * 0.2;
+      currentY += (targetY - currentY) * 0.2;
 
       gsap.to(element, {
-        x,
-        y,
-        duration: 0.3,
-        ease: "power2.out"
+        x: currentX,
+        y: currentY,
+        duration: 0.2,
+        ease: "power1.out"
+      });
+      
+      // Dynamic scale based on proximity
+      const proximityScale = 1.08 + (1 - normalizedDistance) * 0.05;
+      gsap.to(element, {
+        scale: proximityScale,
+        duration: 0.2,
+        ease: "power1.out"
       });
     });
   }
@@ -708,7 +736,13 @@ export class EnhancedCursor {
     this.cursorX = 0;
     this.cursorY = 0;
     this.trail = [];
-    this.trailLength = 8;
+    this.trailLength = 10;
+    this.velocity = { x: 0, y: 0 };
+    this.lastMouseX = 0;
+    this.lastMouseY = 0;
+    this.lastTime = Date.now();
+    this.isHovering = false;
+    this.currentHoverElement = null;
 
     // Only initialize if cursor element exists
     if (this.cursor) {
@@ -719,12 +753,23 @@ export class EnhancedCursor {
   init() {
     // Show cursor on desktop only
     if (window.matchMedia('(pointer: fine)').matches) {
-      gsap.set(this.cursor, { opacity: 0.4 });
+      gsap.set(this.cursor, { opacity: 0.5, scale: 1 });
 
       // Create cursor trail
       this.createTrail();
 
       document.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        const deltaTime = Math.max(1, now - this.lastTime);
+        
+        // Calculate velocity
+        this.velocity.x = (e.clientX - this.lastMouseX) / deltaTime * 16;
+        this.velocity.y = (e.clientY - this.lastMouseY) / deltaTime * 16;
+        
+        this.lastMouseX = e.clientX;
+        this.lastMouseY = e.clientY;
+        this.lastTime = now;
+        
         this.mouseX = e.clientX;
         this.mouseY = e.clientY;
         this.updateTrail();
@@ -744,44 +789,67 @@ export class EnhancedCursor {
     for (let i = 0; i < this.trailLength; i++) {
       const trailDot = document.createElement('div');
       trailDot.className = 'cursor-trail';
+      const size = 12 - i * 0.8;
+      const opacity = 0.4 - i * 0.03;
       trailDot.style.cssText = `
         position: fixed;
-        width: ${16 - i * 1.5}px;
-        height: ${16 - i * 1.5}px;
-        background: rgba(30, 58, 95, ${0.3 - i * 0.03});
+        width: ${size}px;
+        height: ${size}px;
+        background: radial-gradient(circle, rgba(91, 155, 213, ${opacity}) 0%, rgba(30, 58, 95, ${opacity * 0.5}) 100%);
         border-radius: 50%;
         pointer-events: none;
         z-index: 9998;
         will-change: transform;
+        box-shadow: 0 0 ${size * 0.5}px rgba(91, 155, 213, ${opacity * 0.3});
       `;
       document.body.appendChild(trailDot);
-      this.trail.push({ element: trailDot, x: 0, y: 0 });
+      this.trail.push({ element: trailDot, x: 0, y: 0, scale: 1 });
     }
   }
 
   updateTrail() {
-    // Update trail positions with faster easing
+    // Calculate speed for dynamic trail effects
+    const speed = Math.sqrt(this.velocity.x ** 2 + this.velocity.y ** 2);
+    const speedMultiplier = Math.min(speed / 10, 1.5);
+    
+    // Update trail positions with dynamic easing based on speed
     this.trail.forEach((dot, index) => {
-      const ease = 0.15 + index * 0.03; // Faster from 0.1 + 0.02
-      dot.x += (this.mouseX - dot.x) * ease;
-      dot.y += (this.mouseY - dot.y) * ease;
+      const baseEase = 0.2 + index * 0.02;
+      const dynamicEase = baseEase * (1 + speedMultiplier * 0.3);
+      
+      dot.x += (this.mouseX - dot.x) * dynamicEase;
+      dot.y += (this.mouseY - dot.y) * dynamicEase;
+      
+      // Dynamic scale based on speed
+      const targetScale = 1 + speedMultiplier * 0.2;
+      dot.scale += (targetScale - dot.scale) * 0.1;
 
       gsap.set(dot.element, {
         x: dot.x - dot.element.offsetWidth / 2,
-        y: dot.y - dot.element.offsetHeight / 2
+        y: dot.y - dot.element.offsetHeight / 2,
+        scale: dot.scale
       });
     });
   }
 
   animate() {
-    const ease = 0.25; // Faster from 0.18
-    this.cursorX += (this.mouseX - this.cursorX) * ease;
-    this.cursorY += (this.mouseY - this.cursorY) * ease;
+    // Calculate speed for dynamic cursor response
+    const speed = Math.sqrt(this.velocity.x ** 2 + this.velocity.y ** 2);
+    const dynamicEase = Math.max(0.15, 0.3 - speed / 100); // Faster when moving fast
+    
+    this.cursorX += (this.mouseX - this.cursorX) * dynamicEase;
+    this.cursorY += (this.mouseY - this.cursorY) * dynamicEase;
 
     if (this.cursor) {
+      // Dynamic scale based on speed
+      const speedScale = 1 + Math.min(speed / 20, 0.3);
+      const hoverScale = this.isHovering ? 1.8 : 1;
+      const finalScale = speedScale * hoverScale;
+      
       gsap.set(this.cursor, {
         x: this.cursorX - 20,
-        y: this.cursorY - 20
+        y: this.cursorY - 20,
+        scale: finalScale
       });
     }
 
@@ -789,51 +857,208 @@ export class EnhancedCursor {
   }
 
   setupHoverEffects() {
-    // Enhanced cursor interactions with glow
-    document.querySelectorAll('a, button, [data-magnetic]').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        gsap.to(this.cursor, {
-          scale: 2.5,
-          opacity: 0.8,
-          backgroundColor: 'rgba(30, 58, 95, 0.2)',
-          border: '2px solid rgba(30, 58, 95, 0.4)',
-          duration: 0.2, // Faster from 0.3
-          ease: "power2.out"
+    // Enhanced cursor interactions with different states for different elements
+    const interactiveSelectors = [
+      'a', 
+      'button', 
+      '[data-magnetic]', 
+      '[role="button"]',
+      '.interactive-button',
+      '[data-hover-lift]',
+      'input',
+      'textarea',
+      'select'
+    ];
+    
+    interactiveSelectors.forEach(selector => {
+      document.querySelectorAll(selector).forEach(el => {
+        // Determine element type for different effects
+        const isButton = el.tagName === 'BUTTON' || el.classList.contains('interactive-button');
+        const isLink = el.tagName === 'A';
+        const isInput = ['INPUT', 'TEXTAREA', 'SELECT'].includes(el.tagName);
+        const hasMagnetic = el.hasAttribute('data-magnetic');
+        
+        el.addEventListener('mouseenter', () => {
+          this.isHovering = true;
+          this.currentHoverElement = el;
+          
+          // Different effects based on element type
+          if (isButton) {
+            gsap.to(this.cursor, {
+              scale: 2.2,
+              opacity: 0.9,
+              backgroundColor: 'rgba(91, 155, 213, 0.25)',
+              border: '2px solid rgba(91, 155, 213, 0.5)',
+              duration: 0.15,
+              ease: "power2.out"
+            });
+          } else if (isLink) {
+            gsap.to(this.cursor, {
+              scale: 1.8,
+              opacity: 0.7,
+              backgroundColor: 'rgba(30, 58, 95, 0.15)',
+              border: '2px solid rgba(30, 58, 95, 0.4)',
+              duration: 0.15,
+              ease: "power2.out"
+            });
+          } else if (isInput) {
+            gsap.to(this.cursor, {
+              scale: 0.8,
+              opacity: 0.6,
+              backgroundColor: 'rgba(91, 155, 213, 0.2)',
+              border: '1.5px solid rgba(91, 155, 213, 0.4)',
+              duration: 0.15,
+              ease: "power2.out"
+            });
+          } else {
+            gsap.to(this.cursor, {
+              scale: 1.6,
+              opacity: 0.75,
+              backgroundColor: 'rgba(30, 58, 95, 0.2)',
+              border: '2px solid rgba(30, 58, 95, 0.4)',
+              duration: 0.15,
+              ease: "power2.out"
+            });
+          }
+
+          // Enhanced trail pulse effect
+          this.trail.forEach((dot, i) => {
+            gsap.to(dot.element, {
+              scale: 1.4 + (hasMagnetic ? 0.3 : 0),
+              opacity: 0.6 + i * 0.02,
+              duration: 0.15,
+              delay: i * 0.008,
+              ease: "power2.out"
+            });
+          });
+          
+          // Add magnetic pull effect
+          if (hasMagnetic) {
+            this.setupMagneticPull(el);
+          }
         });
 
-        // Pulse effect on trail - faster
-        this.trail.forEach((dot, i) => {
-          gsap.to(dot.element, {
-            scale: 1.5,
-            duration: 0.2, // Faster from 0.3
-            delay: i * 0.01, // Faster from 0.02
+        el.addEventListener('mouseleave', () => {
+          this.isHovering = false;
+          this.currentHoverElement = null;
+          
+          gsap.to(this.cursor, {
+            scale: 1,
+            opacity: 0.5,
+            backgroundColor: 'transparent',
+            border: '1px solid rgba(30, 58, 95, 0.2)',
+            duration: 0.2,
             ease: "power2.out"
           });
-        });
-      });
 
-      el.addEventListener('mouseleave', () => {
-        gsap.to(this.cursor, {
-          scale: 1,
-          opacity: 0.4,
-          backgroundColor: 'transparent',
-          border: '1px solid rgba(30, 58, 95, 0.2)',
-          duration: 0.2, // Faster from 0.3
-          ease: "power2.out"
-        });
-
-        this.trail.forEach((dot) => {
-          gsap.to(dot.element, {
-            scale: 1,
-            duration: 0.2, // Faster from 0.3
-            ease: "power2.out"
+          this.trail.forEach((dot) => {
+            gsap.to(dot.element, {
+              scale: 1,
+              opacity: 0.4 - (this.trail.indexOf(dot) * 0.03),
+              duration: 0.2,
+              ease: "power2.out"
+            });
           });
         });
       });
     });
+    
+    // Add hover effects for cards and project items
+    document.querySelectorAll('[data-project-card], .glass, .hover-lift').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        if (!this.isHovering) {
+          gsap.to(this.cursor, {
+            scale: 1.4,
+            opacity: 0.65,
+            duration: 0.2,
+            ease: "power2.out"
+          });
+        }
+      });
+      
+      el.addEventListener('mouseleave', () => {
+        if (!this.isHovering) {
+          gsap.to(this.cursor, {
+            scale: 1,
+            opacity: 0.5,
+            duration: 0.2,
+            ease: "power2.out"
+          });
+        }
+      });
+    });
+  }
+  
+  setupMagneticPull(element) {
+    const handleMouseMove = (e) => {
+      if (!this.isHovering || this.currentHoverElement !== element) return;
+      
+      const rect = element.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      const deltaX = e.clientX - centerX;
+      const deltaY = e.clientY - centerY;
+      const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+      const maxDistance = 150;
+      
+      if (distance < maxDistance) {
+        const strength = 0.15 * (1 - distance / maxDistance);
+        const pullX = deltaX * strength;
+        const pullY = deltaY * strength;
+        
+        // Pull cursor towards element
+        this.cursorX += pullX;
+        this.cursorY += pullY;
+      }
+    };
+    
+    element.addEventListener('mousemove', handleMouseMove);
+    element.addEventListener('mouseleave', () => {
+      element.removeEventListener('mousemove', handleMouseMove);
+    }, { once: true });
   }
 
   setupClickEffects() {
+    document.addEventListener('mousedown', (e) => {
+      // Cursor shrink on click
+      gsap.to(this.cursor, {
+        scale: 0.7,
+        duration: 0.1,
+        ease: "power2.out"
+      });
+      
+      // Trail compression
+      this.trail.forEach((dot, i) => {
+        gsap.to(dot.element, {
+          scale: 0.6,
+          duration: 0.1,
+          delay: i * 0.01,
+          ease: "power2.out"
+        });
+      });
+    });
+    
+    document.addEventListener('mouseup', () => {
+      // Cursor bounce back
+      const targetScale = this.isHovering ? 1.8 : 1;
+      gsap.to(this.cursor, {
+        scale: targetScale,
+        duration: 0.3,
+        ease: "elastic.out(1, 0.5)"
+      });
+      
+      // Trail bounce back
+      this.trail.forEach((dot, i) => {
+        gsap.to(dot.element, {
+          scale: 1,
+          duration: 0.3,
+          delay: i * 0.01,
+          ease: "elastic.out(1, 0.5)"
+        });
+      });
+    });
+    
     document.addEventListener('click', (e) => {
       this.createSmoothRing(e.clientX, e.clientY);
       this.createSmoothParticles(e.clientX, e.clientY);
@@ -841,30 +1066,34 @@ export class EnhancedCursor {
   }
 
   createSmoothRing(x, y) {
-    // Create multiple expanding rings for depth
+    // Create multiple expanding rings with better visual design
     for (let i = 0; i < 3; i++) {
       const ring = document.createElement('div');
       ring.className = 'cursor-ripple';
+      const color = i === 0 ? 'rgba(91, 155, 213, 0.6)' : 
+                    i === 1 ? 'rgba(125, 184, 232, 0.4)' : 
+                    'rgba(30, 58, 95, 0.3)';
       ring.style.cssText = `
         position: fixed;
         left: ${x}px;
         top: ${y}px;
-        width: 10px;
-        height: 10px;
-        border: 2px solid rgba(30, 58, 95, ${0.6 - i * 0.15});
+        width: 8px;
+        height: 8px;
+        border: 2px solid ${color};
         border-radius: 50%;
         pointer-events: none;
         z-index: 9997;
         transform: translate(-50%, -50%);
+        box-shadow: 0 0 20px ${color};
       `;
       document.body.appendChild(ring);
 
       gsap.to(ring, {
-        width: 120 + i * 20,
-        height: 120 + i * 20,
+        width: 100 + i * 30,
+        height: 100 + i * 30,
         opacity: 0,
-        duration: 1,
-        delay: i * 0.1,
+        duration: 0.8,
+        delay: i * 0.08,
         ease: "power2.out",
         onComplete: () => ring.remove()
       });
@@ -872,27 +1101,30 @@ export class EnhancedCursor {
   }
 
   createSmoothParticles(x, y) {
-    // Smooth circular particle wave
-    const particleCount = 8;
+    // Enhanced particle burst with better colors
+    const particleCount = 12;
+    const speed = Math.sqrt(this.velocity.x ** 2 + this.velocity.y ** 2);
+    const distance = 50 + Math.min(speed / 2, 30);
+    
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement('div');
       particle.className = 'cursor-smooth-particle';
+      const hue = (i / particleCount) * 60 + 200; // Blue range
       particle.style.cssText = `
         position: fixed;
         left: ${x}px;
         top: ${y}px;
-        width: 8px;
-        height: 8px;
-        background: linear-gradient(135deg, rgba(30, 58, 95, 0.8), rgba(42, 77, 124, 0.6));
+        width: 6px;
+        height: 6px;
+        background: radial-gradient(circle, rgba(91, 155, 213, 0.9), rgba(30, 58, 95, 0.6));
         border-radius: 50%;
         pointer-events: none;
         z-index: 9997;
-        box-shadow: 0 0 10px rgba(30, 58, 95, 0.3);
+        box-shadow: 0 0 12px rgba(91, 155, 213, 0.6);
       `;
       document.body.appendChild(particle);
 
       const angle = (Math.PI * 2 * i) / particleCount;
-      const distance = 60;
       const tx = Math.cos(angle) * distance;
       const ty = Math.sin(angle) * distance;
 
@@ -900,8 +1132,9 @@ export class EnhancedCursor {
         x: tx,
         y: ty,
         opacity: 0,
-        scale: 0.3,
-        duration: 0.8,
+        scale: 0.2,
+        duration: 0.6,
+        delay: i * 0.02,
         ease: "power2.out",
         onComplete: () => particle.remove()
       });
@@ -911,23 +1144,31 @@ export class EnhancedCursor {
   createSpotlight() {
     const spotlight = document.createElement('div');
     spotlight.id = 'cursor-spotlight';
+    const speed = Math.sqrt(this.velocity.x ** 2 + this.velocity.y ** 2);
+    const size = 300 + Math.min(speed * 2, 200);
     spotlight.style.cssText = `
       position: fixed;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(30, 58, 95, 0.08) 0%, transparent 70%);
+      width: ${size}px;
+      height: ${size}px;
+      background: radial-gradient(circle, rgba(91, 155, 213, 0.06) 0%, rgba(30, 58, 95, 0.03) 50%, transparent 70%);
       pointer-events: none;
       z-index: 1;
       will-change: transform;
       mix-blend-mode: screen;
+      filter: blur(20px);
     `;
     document.body.appendChild(spotlight);
 
     const updateSpotlight = () => {
+      const speed = Math.sqrt(this.velocity.x ** 2 + this.velocity.y ** 2);
+      const dynamicSize = 300 + Math.min(speed * 2, 200);
+      
       gsap.to(spotlight, {
-        x: this.mouseX - 200,
-        y: this.mouseY - 200,
-        duration: 0.3, // Faster from 0.5
+        x: this.mouseX - dynamicSize / 2,
+        y: this.mouseY - dynamicSize / 2,
+        width: dynamicSize,
+        height: dynamicSize,
+        duration: 0.2,
         ease: "power2.out"
       });
       requestAnimationFrame(updateSpotlight);

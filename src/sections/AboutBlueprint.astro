@@ -2,59 +2,89 @@
 import { person } from '../../data/person';
 ---
 
-<section id="about" class="py-32 relative overflow-hidden">
-  <!-- Background elements -->
-  <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[var(--primary)]/10 to-transparent blur-3xl" data-parallax data-speed="0.3"></div>
+<section id="about" class="py-20 bg-gradient-to-b from-white/30 to-[var(--bg)] relative overflow-hidden">
+  <!-- Subtle background accent -->
+  <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[var(--primary)]/5 to-transparent blur-3xl"></div>
 
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <h2 class="text-4xl md:text-5xl font-display font-bold mb-12" data-animate data-text-reveal>
+    <h2 class="text-4xl md:text-5xl font-display font-bold mb-12 fade-in-on-scroll">
       About
     </h2>
 
-    <!-- Bio with stagger animation -->
-    <div class="space-y-6 text-lg text-[var(--muted)] leading-relaxed mb-16" data-animate>
-      <p style="will-change: transform, opacity;">{person.bio}</p>
+    <!-- Bio -->
+    <div class="mb-12 fade-in-on-scroll">
+      <p class="text-lg text-[var(--muted)] leading-relaxed">{person.bio}</p>
     </div>
 
-    <!-- Skills with animated cards -->
-    <div class="mb-16" data-animate>
-      <h3 class="text-xl font-semibold mb-6 text-[var(--fg)]" data-animate>Skills</h3>
-      <div class="space-y-4">
+    <!-- Skills -->
+    <div class="mb-12 fade-in-on-scroll">
+      <h3 class="text-2xl font-semibold mb-6 text-[var(--fg)]">Skills</h3>
+      <div class="space-y-3">
         {Object.entries(person.skills).map(([category, skills], index) => (
           <div
-            class="group p-4 rounded-lg border border-[var(--graphite)]/30 hover:border-[var(--primary)]/50 transition-all duration-300"
-            data-scale
-            data-hover-lift
-            style={`transition-delay: ${index * 0.1}s; will-change: transform;`}
+            class="group p-4 rounded-lg border border-[var(--graphite)]/20 bg-white/50 hover:bg-white/80 hover:border-[var(--primary)]/30 transition-all duration-300 hover:shadow-md hover:-translate-x-1"
+            style={`transition-delay: ${index * 50}ms;`}
           >
-            <span class="text-sm text-[var(--muted)] font-medium">{category}:</span>
+            <span class="text-sm text-[var(--muted)] font-medium group-hover:text-[var(--primary)] transition-colors duration-300">{category}:</span>
             <span class="text-sm text-[var(--fg)] ml-2">{skills.join(', ')}</span>
           </div>
         ))}
       </div>
     </div>
 
-    <!-- Timeline with animated entries -->
-    <div data-animate>
-      <h3 class="text-xl font-semibold mb-6 text-[var(--fg)]" data-animate>Timeline</h3>
+    <!-- Timeline -->
+    <div class="fade-in-on-scroll">
+      <h3 class="text-2xl font-semibold mb-6 text-[var(--fg)]">Timeline</h3>
       <div class="space-y-4 relative">
         <!-- Vertical line -->
-        <div class="absolute left-[30px] top-0 bottom-0 w-px bg-gradient-to-b from-[var(--primary)]/50 to-transparent"></div>
+        <div class="absolute left-[30px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-[var(--primary)]/50 to-transparent"></div>
 
         {person.timeline.map((item, index) => (
           <div
-            class="flex gap-8 items-baseline group relative"
-            data-scale
-            style={`transition-delay: ${index * 0.1}s; will-change: transform, opacity;`}
+            class="group flex gap-6 items-baseline relative pl-2 hover:-translate-x-1 transition-transform duration-300"
+            style={`transition-delay: ${index * 100}ms;`}
           >
-            <span class="text-sm font-mono text-[var(--primary)] w-16 flex-shrink-0 relative">
-              <span class="inline-block group-hover:scale-110 transition-transform duration-300">{item.year}</span>
-              <div class="absolute left-[60px] top-1/2 w-2 h-2 rounded-full bg-[var(--primary)] -translate-y-1/2"></div>
+            <span class="text-sm font-mono text-[var(--primary)] w-16 flex-shrink-0 relative group-hover:scale-110 transition-transform duration-300">
+              {item.year}
+              <div class="absolute left-[60px] top-1/2 w-2 h-2 rounded-full bg-[var(--primary)] -translate-y-1/2 group-hover:scale-150 group-hover:shadow-lg group-hover:shadow-[var(--primary)]/50 transition-all duration-300"></div>
             </span>
-            <span class="text-[var(--muted)] group-hover:text-[var(--fg)] transition-colors duration-300 pl-4">{item.event}</span>
+            <span class="text-[var(--muted)] group-hover:text-[var(--fg)] transition-colors duration-300">{item.event}</span>
           </div>
         ))}
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .fade-in-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .fade-in-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
+    observer.observe(el);
+  });
+</script>

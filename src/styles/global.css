@@ -183,7 +183,7 @@
     border-width: 0;
   }
 
-  /* Custom cursor styles */
+  /* Custom cursor styles - Enhanced */
   .custom-cursor {
     position: fixed;
     top: 0;
@@ -193,17 +193,31 @@
     pointer-events: none;
     z-index: 9999;
     border-radius: 50%;
-    border: 1px solid rgba(30, 58, 95, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1.5px solid rgba(91, 155, 213, 0.3);
+    background: radial-gradient(circle, rgba(91, 155, 213, 0.1) 0%, transparent 70%);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    box-shadow: 0 0 20px rgba(91, 155, 213, 0.2),
+                inset 0 0 10px rgba(91, 155, 213, 0.1);
   }
 
   .cursor-dot {
-    width: 100%;
-    height: 100%;
-    background: rgba(30, 58, 95, 0.1);
+    width: 8px;
+    height: 8px;
+    background: rgba(91, 155, 213, 0.8);
     border-radius: 50%;
-    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-                background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+                background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 8px rgba(91, 155, 213, 0.6);
+  }
+  
+  /* Cursor trail styles */
+  .cursor-trail {
+    will-change: transform, opacity, scale;
   }
 
   @media (pointer: coarse) {

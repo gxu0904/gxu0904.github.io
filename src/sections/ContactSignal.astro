@@ -2,68 +2,111 @@
 import { person } from '../../data/person';
 ---
 
-<section id="contact" class="py-32">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-4xl md:text-5xl font-display font-bold mb-8">
+<section id="contact" class="py-20 bg-[var(--bg)] relative overflow-hidden">
+  <!-- Subtle background accent -->
+  <div class="absolute top-0 right-1/4 w-96 h-96 bg-gradient-to-bl from-[var(--accent)]/10 to-transparent blur-3xl"></div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <h2 class="text-4xl md:text-5xl font-display font-bold mb-8 fade-in-on-scroll">
       Contact
     </h2>
-    <p class="text-lg text-[var(--muted)] mb-12">
+    <p class="text-lg text-[var(--muted)] mb-12 fade-in-on-scroll">
       Let's connect and build something amazing together.
     </p>
 
-    <div class="space-y-6">
+    <div class="space-y-4">
       <a
         href={`mailto:${person.email}`}
-        class="group flex items-center gap-4 p-4 rounded-xl border border-[var(--graphite)]/30 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all duration-300"
-        data-magnetic
-        data-hover-lift
+        class="group fade-in-on-scroll flex items-center gap-4 p-5 rounded-xl border border-[var(--graphite)]/20 hover:border-[var(--primary)]/40 bg-white/50 hover:bg-white/80 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
       >
-        <div class="p-2 bg-[var(--graphite)]/30 rounded-lg group-hover:bg-[var(--primary)]/10 transition-colors">
-          <svg class="w-5 h-5 text-[var(--muted)] group-hover:text-[var(--primary)] transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <div class="p-3 bg-[var(--graphite)]/20 group-hover:bg-[var(--primary)]/10 rounded-lg transition-all duration-300 group-hover:scale-110">
+          <svg class="w-5 h-5 text-[var(--muted)] group-hover:text-[var(--primary)] transition-colors duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
           </svg>
         </div>
-        <div>
-          <div class="text-sm text-[var(--muted)]">Email</div>
-          <div class="text-[var(--fg)] font-medium group-hover:text-[var(--primary)] transition-colors">{person.email}</div>
+        <div class="flex-1">
+          <div class="text-sm text-[var(--muted)] group-hover:text-[var(--primary)] transition-colors duration-300">Email</div>
+          <div class="text-[var(--fg)] font-medium">{person.email}</div>
         </div>
+        <svg class="w-5 h-5 text-[var(--muted)] opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
       </a>
+
       <a
         href={person.github}
         target="_blank"
         rel="noopener noreferrer"
-        class="group flex items-center gap-4 p-4 rounded-xl border border-[var(--graphite)]/30 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all duration-300"
-        data-magnetic
-        data-hover-lift
+        class="group fade-in-on-scroll flex items-center gap-4 p-5 rounded-xl border border-[var(--graphite)]/20 hover:border-[var(--primary)]/40 bg-white/50 hover:bg-white/80 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+        style="transition-delay: 100ms;"
       >
-        <div class="p-2 bg-[var(--graphite)]/30 rounded-lg group-hover:bg-[var(--primary)]/10 transition-colors">
-          <svg class="w-5 h-5 text-[var(--muted)] group-hover:text-[var(--primary)] transition-colors" fill="currentColor" viewBox="0 0 24 24">
+        <div class="p-3 bg-[var(--graphite)]/20 group-hover:bg-[var(--primary)]/10 rounded-lg transition-all duration-300 group-hover:scale-110">
+          <svg class="w-5 h-5 text-[var(--muted)] group-hover:text-[var(--primary)] transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
           </svg>
         </div>
-        <div>
-          <div class="text-sm text-[var(--muted)]">GitHub</div>
-          <div class="text-[var(--fg)] font-medium group-hover:text-[var(--primary)] transition-colors">@gxu0904</div>
+        <div class="flex-1">
+          <div class="text-sm text-[var(--muted)] group-hover:text-[var(--primary)] transition-colors duration-300">GitHub</div>
+          <div class="text-[var(--fg)] font-medium">@gxu0904</div>
         </div>
+        <svg class="w-5 h-5 text-[var(--muted)] opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
       </a>
+
       <a
         href={person.linkedin}
         target="_blank"
         rel="noopener noreferrer"
-        class="group flex items-center gap-4 p-4 rounded-xl border border-[var(--graphite)]/30 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 transition-all duration-300"
-        data-magnetic
-        data-hover-lift
+        class="group fade-in-on-scroll flex items-center gap-4 p-5 rounded-xl border border-[var(--graphite)]/20 hover:border-[var(--primary)]/40 bg-white/50 hover:bg-white/80 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+        style="transition-delay: 200ms;"
       >
-        <div class="p-2 bg-[var(--graphite)]/30 rounded-lg group-hover:bg-[var(--primary)]/10 transition-colors">
-          <svg class="w-5 h-5 text-[var(--muted)] group-hover:text-[var(--primary)] transition-colors" fill="currentColor" viewBox="0 0 24 24">
+        <div class="p-3 bg-[var(--graphite)]/20 group-hover:bg-[var(--primary)]/10 rounded-lg transition-all duration-300 group-hover:scale-110">
+          <svg class="w-5 h-5 text-[var(--muted)] group-hover:text-[var(--primary)] transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
           </svg>
         </div>
-        <div>
-          <div class="text-sm text-[var(--muted)]">LinkedIn</div>
-          <div class="text-[var(--fg)] font-medium group-hover:text-[var(--primary)] transition-colors">Grace Xu</div>
+        <div class="flex-1">
+          <div class="text-sm text-[var(--muted)] group-hover:text-[var(--primary)] transition-colors duration-300">LinkedIn</div>
+          <div class="text-[var(--fg)] font-medium">Grace Xu</div>
         </div>
+        <svg class="w-5 h-5 text-[var(--muted)] opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
       </a>
     </div>
   </div>
 </section>
+
+<style>
+  .fade-in-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .fade-in-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
+    observer.observe(el);
+  });
+</script>
