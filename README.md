@@ -1,14 +1,6 @@
-# Systems in Motion
+# Yay
 
-A cinematic personal website for Grace Xu built with Next.js, Three.js, and Framer Motion.
-
-## Features
-
-- 3D interactive scenes on all sections
-- Browser Company-inspired design with glassmorphism
-- Smooth animations and cursor interactions
-- Command palette (⌘K)
-- Fully responsive and accessible
+My personal website built with Next.js, Three.js, and Framer Motion.
 
 ## Getting Started
 
