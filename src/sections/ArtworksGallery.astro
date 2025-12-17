@@ -1,0 +1,88 @@
+---
+import artworksData from '../../data/artworks.json';
+
+const artworks = artworksData;
+---
+
+<section id="artworks" class="py-20 bg-[var(--bg)] relative overflow-hidden">
+  <!-- Subtle background accent -->
+  <div class="absolute top-20 left-0 w-96 h-96 bg-gradient-to-br from-[var(--accent)]/10 to-transparent blur-3xl"></div>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section header -->
+    <div class="mb-16 fade-in-on-scroll">
+      <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">
+        Artworks
+      </h2>
+      <p class="text-lg text-[var(--muted)] max-w-2xl">
+        A collection of visual explorations across different mediums
+      </p>
+    </div>
+
+    <!-- Artworks grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {artworks.map((artwork, index) => (
+        <div
+          class="group fade-in-on-scroll"
+          style={`transition-delay: ${index * 50}ms;`}
+        >
+          <div class="relative aspect-square overflow-hidden rounded-lg bg-[var(--graphite)]/10 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+            <!-- Image -->
+            <img
+              src={artwork.image}
+              alt={artwork.title}
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
+            />
+
+            <!-- Overlay with info -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+              <h3 class="text-xl font-display font-bold text-white mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                {artwork.title}
+              </h3>
+              <p class="text-sm text-white/80 mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                {artwork.medium} • {artwork.year}
+              </p>
+              <p class="text-sm text-white/70 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
+                {artwork.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .fade-in-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .fade-in-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
+    observer.observe(el);
+  });
+</script>
