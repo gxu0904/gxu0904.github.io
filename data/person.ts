@@ -15,7 +15,7 @@ export const person = {
   ],
 
   bio: 
-    "I'm a full-stack developer, robotics software lead, and nonprofit CTO passionate about building tools that improve learning, accessibility, and global equity. I love creating systems that combine clean engineering with thoughtful UX — from AI-powered education platforms, to assistive technology for visually impaired shoppers, to the infrastructure behind a 10+ country nonprofit. My work sits at the intersection of software, hardware, and impactful problem-solving.",
+    "Hello, I'm Grace! I'm a senior at Valley Christian High School passionate about building tools that improve learning, accessibility, and global equity. I love creating systems that combine engineering with social impact — from AI-powered education platforms, to assistive technology for visually impaired shoppers, to the infrastructure behind a 10+ country nonprofit. My work sits at the intersection of software, hardware, and impactful problem-solving.",
 
   skills: {
     "Languages": ["Python", "TypeScript", "Java", "C++", "Go", "SQL"],
@@ -26,10 +26,10 @@ export const person = {
   },
 
   timeline: [
-    { year: "2025", event: "ICDC Champion — VBC Sports (1st Place); Reached USACO Platinum" },
+    { year: "2025", event: "1st Place ICDC - VBC Sports; Reached USACO Platinum Division; Attended M&TSI over summer, created device to assist visually impaired shoppers" },
     { year: "2024", event: "Co-founded StudyAP; Scaled LightAid to 10+ chapters; Joined DECA leadership" },
     { year: "2023", event: "Battled Aplastic anemia, received bone marrow transplant" },
-    { year: "2022", event: "Summer: Attended COSMOS Cluster 5, created card-dealing robot final project" },
+    { year: "2022", event: "Summer: Attended COSMOS Cluster 5, created card-dealing robot for final project" },
     { year: "2021", event: "Joined FRC 3256; began competitive programming journey" }
   ]
 } as const;
