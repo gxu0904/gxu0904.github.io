@@ -1,0 +1,82 @@
+[
+  {
+    "slug": "king-bob",
+    "title": "King Bob",
+    "medium": "Acrylic on Canvas",
+    "year": 2025,
+    "description": "A playful reinterpretation of a popular animated character, emphasizing exaggerated expression and bold color contrasts. Created to explore pop culture imagery through vibrant brushwork and simplified forms.",
+    "image": "/images/projects/king-bob.jpg"
+  },
+  {
+    "slug": "strings-of-life",
+    "title": "Strings of Life",
+    "medium": "Graphite on Paper",
+    "year": 2025,
+    "description": "Conceptual drawing exploring the fragility and interconnectedness of human existence. The composition uses anatomical precision and symbolic elements to depict control and dependency, blending realism with surreal tension.",
+    "image": "/images/projects/strings-of-life.jpg"
+  },
+  {
+    "slug": "circuit-of-thought",
+    "title": "Circuit of Thought",
+    "medium": "Graphite on Paper",
+    "year": 2024,
+    "description": "A conceptual drawing exploring the intersection of technology and human cognition. Mechanical elements and wiring intertwine with organic forms, symbolizing the tension between control, innovation, and identity.",
+    "image": "/images/projects/circuit-of-thought.jpg"
+  },
+  {
+    "slug": "fragments-of-opulence",
+    "title": "Fragments of Opulence",
+    "medium": "Color pencil on paper",
+    "year": 2024,
+    "description": "A still-life composition combining natural and precious elements. The piece contrasts the organic texture of a pomegranate with the sharp geometry of rubies, exploring themes of luxury, fragility, and the interplay between nature and refinement through layered color and light.",
+    "image": "/images/projects/fragments-of-opulence.jpg"
+  },
+  {
+    "slug": "sunset-sail",
+    "title": "Sunset Sail",
+    "medium": "Acrylic on Canvas",
+    "year": 2024,
+    "description": "A seascape capturing the glow of sunset over calm waters. The piece emphasizes vibrant color transitions and reflections, using layered brushwork to convey movement, light, and atmosphere.",
+    "image": "/images/projects/sunset-sail.jpg"
+  },
+  {
+    "slug": "spring-ascent",
+    "title": "Spring Ascent",
+    "medium": "Acrylic on Canvas",
+    "year": 2024,
+    "description": "A landscape inspired by Japanese scenery, featuring cherry blossoms, a cable car, and a distant snow-capped peak. The composition captures movement and serenity, using soft color transitions and textured brushwork to evoke seasonal beauty.",
+    "image": "/images/projects/spring-ascent.jpg"
+  },
+  {
+    "slug": "peonies-in-a-vase",
+    "title": "Peonies in a Vase",
+    "medium": "Acrylic on Canvas",
+    "year": 2025,
+    "description": "This piece is an exploration of light, texture, and organic form through the timeless subject of floral still life. The soft pink peonies symbolize resilience and renewal, themes that resonate deeply with my personal journey. I chose a dark, muted background to create contrast and emphasize the vibrancy of the blossoms, allowing their delicate petals to stand out. The scattered petals on the table introduce a sense of impermanence, reminding viewers of the fleeting nature of beauty and life. The painting was created using layered brushstrokes to capture the subtle variations in color and texture within each bloom. My goal was to evoke both serenity and vitality, blending classical still-life traditions with a modern, expressive approach.",
+    "image": "/images/projects/peonies-in-a-vase.jpg"
+  },
+  {
+    "slug": "oceans-edge",
+    "title": "Ocean's Edge",
+    "medium": "Acrylic on Canvas",
+    "year": 2024,
+    "description": "This painting captures the dynamic interplay between sea and sky, focusing on the movement and energy of a breaking wave against the calm horizon. The composition emphasizes contrast: the turbulent foreground wave with its textured brushstrokes versus the expansive, serene clouds above. I aimed to convey a sense of freedom and vastness through the use of cool tones–deep blues and turquoise for the ocean, soft whites for the clouds–while maintaining warmth in the sandy shore. The layered technique creates depth, allowing viewers to feel both the immediacy of the wave and the infinite distance of the horizon. This piece reflects my fascination with nature’s duality: its power and tranquility coexisting in harmony.",
+    "image": "/images/projects/oceans-edge.jpg"
+  },
+  {
+    "slug": "leap-of-freedom",
+    "title": "Leap of Freedom",
+    "medium": "Colored Pencil on Paper",
+    "year": 2024,
+    "description": "This piece began as a colored pencil drawing on paper and was later digitally refined to enhance color vibrancy and depth. I aimed to capture the dynamic energy of a marlin breaking through the ocean’s surface, symbolizing resilience and motion. The flying fish in the background add narrative and scale, emphasizing the interconnectedness of marine life. By combining traditional techniques with digital tools, I explored how technology can amplify detail and create a sense of movement while preserving the tactile qualities of hand-drawn art. For me, this artwork represents freedom and adaptability–qualities that inspire both my artistic and academic pursuits.",
+    "image": "/images/projects/leap-of-freedom.jpg"
+  },
+  {
+    "slug": "notes-and-treats",
+    "title": "Notes and Treats",
+    "medium": "Acrylic on Canvas",
+    "year": 2025,
+    "description": "This piece began as a colored pencil drawing and was digitally refined for color and contrast. It depicts candies scattered across a table alongside handwritten notes for various occasions–birthdays, holidays, and celebrations. The composition explores how small gestures, like sweets and messages, create moments of connection. By blending traditional and digital techniques, I aimed to evoke warmth and nostalgia while highlighting the vibrancy of everyday objects.",
+    "image": "/images/projects/notes-and-treats.jpg"
+  }
+]
