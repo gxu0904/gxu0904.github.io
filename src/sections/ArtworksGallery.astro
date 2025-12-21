@@ -117,14 +117,21 @@ const artworks = artworksData;
 
   // Modal functionality
   const modal = document.getElementById('artwork-modal');
-  const modalContent = document.getElementById('modal-content');
   const modalTitle = document.getElementById('modal-title');
   const modalMeta = document.getElementById('modal-meta');
-  const modalImage = document.getElementById('modal-image');
+  const modalImage = document.getElementById('modal-image') as HTMLImageElement | null;
   const modalDescription = document.getElementById('modal-description');
   const closeButton = document.getElementById('close-modal');
 
-  const artworksData = [
+  interface Artwork {
+    title: string;
+    medium: string;
+    year: number;
+    description: string;
+    image: string;
+  }
+
+  const artworksData: Artwork[] = [
     {
       "title": "King Bob",
       "medium": "Acrylic on Canvas",
@@ -197,7 +204,9 @@ const artworks = artworksData;
     }
   ];
 
-  function openModal(artwork) {
+  function openModal(artwork: Artwork) {
+    if (!modal || !modalTitle || !modalMeta || !modalImage || !modalDescription) return;
+
     modalTitle.textContent = artwork.title;
     modalMeta.textContent = `${artwork.medium} • ${artwork.year}`;
     modalImage.src = artwork.image;
@@ -208,7 +217,7 @@ const artworks = artworksData;
 
     // Trigger animation
     setTimeout(() => {
-      modal.style.opacity = '1';
+      if (modal) modal.style.opacity = '1';
     }, 10);
 
     // Prevent body scroll
@@ -216,10 +225,12 @@ const artworks = artworksData;
   }
 
   function closeModal() {
+    if (!modal) return;
+
     modal.style.opacity = '0';
 
     setTimeout(() => {
-      modal.classList.add('hidden');
+      if (modal) modal.classList.add('hidden');
       document.body.style.overflow = '';
     }, 400);
   }
