@@ -19,37 +19,66 @@ const artworks = artworksData;
       </p>
     </div>
 
-    <!-- Artworks grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Artworks masonry grid -->
+    <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
       {artworks.map((artwork, index) => (
         <div
-          class="group fade-in-on-scroll"
+          class="group fade-in-on-scroll break-inside-avoid"
           style={`transition-delay: ${index * 50}ms;`}
         >
-          <div class="relative aspect-square overflow-hidden rounded-lg bg-[var(--graphite)]/10 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+          <div class="artwork-card relative overflow-hidden rounded-lg bg-[var(--graphite)]/10 hover:shadow-2xl transition-all duration-500 cursor-pointer">
             <!-- Image -->
             <img
               src={artwork.image}
               alt={artwork.title}
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
               loading="lazy"
             />
 
-            <!-- Overlay with info -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+            <!-- Hover overlay with basic info -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
               <h3 class="text-xl font-display font-bold text-white mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                 {artwork.title}
               </h3>
-              <p class="text-sm text-white/80 mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+              <p class="text-sm text-white/90 mb-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
                 {artwork.medium} • {artwork.year}
               </p>
-              <p class="text-sm text-white/70 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
-                {artwork.description}
+              <p class="text-xs text-white/70 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
+                Click to read more
               </p>
             </div>
           </div>
         </div>
       ))}
+    </div>
+
+    <!-- Modal for full description -->
+    <div id="artwork-modal" class="fixed inset-0 bg-black/95 z-50 hidden" style="opacity: 0; transition: opacity 0.4s ease;">
+      <div class="w-full h-full flex items-center justify-center p-4 md:p-8 lg:p-12">
+        <div class="relative w-full h-full max-w-7xl flex flex-col lg:flex-row gap-6 lg:gap-12" id="modal-content">
+
+          <!-- Close button - floating top right -->
+          <button id="close-modal" class="absolute top-0 right-0 z-10 text-white/60 hover:text-white transition-colors p-3 hover:bg-white/10 rounded-full backdrop-blur-sm">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+
+          <!-- Image container - centered and responsive -->
+          <div class="flex-1 flex items-center justify-center min-h-0">
+            <img id="modal-image" src="" alt="" class="max-w-full max-h-full w-auto h-auto object-contain" style="box-shadow: 0 20px 60px rgba(0,0,0,0.5);" />
+          </div>
+
+          <!-- Description panel - clean white/dark card -->
+          <div class="lg:w-96 xl:w-[28rem] flex-shrink-0 bg-white dark:bg-[var(--graphite)] rounded-2xl p-6 md:p-8 flex flex-col max-h-[40vh] lg:max-h-full overflow-hidden">
+            <div class="flex-1 overflow-y-auto">
+              <h3 class="text-2xl md:text-3xl font-display font-bold text-[var(--fg)] mb-2" id="modal-title"></h3>
+              <p class="text-sm md:text-base text-[var(--muted)] mb-6 pb-6 border-b border-[var(--graphite)]/20" id="modal-meta"></p>
+              <p class="text-[var(--muted)] leading-relaxed text-sm md:text-base" id="modal-description"></p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -84,5 +113,136 @@ const artworks = artworksData;
 
   document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
     observer.observe(el);
+  });
+
+  // Modal functionality
+  const modal = document.getElementById('artwork-modal');
+  const modalContent = document.getElementById('modal-content');
+  const modalTitle = document.getElementById('modal-title');
+  const modalMeta = document.getElementById('modal-meta');
+  const modalImage = document.getElementById('modal-image');
+  const modalDescription = document.getElementById('modal-description');
+  const closeButton = document.getElementById('close-modal');
+
+  const artworksData = [
+    {
+      "title": "King Bob",
+      "medium": "Acrylic on Canvas",
+      "year": 2025,
+      "description": "A playful reinterpretation of a popular animated character, emphasizing exaggerated expression and bold color contrasts. Created to explore pop culture imagery through vibrant brushwork and simplified forms.",
+      "image": "/images/projects/king-bob.jpg"
+    },
+    {
+      "title": "Strings of Life",
+      "medium": "Graphite on Paper",
+      "year": 2025,
+      "description": "Conceptual drawing exploring the fragility and interconnectedness of human existence. The composition uses anatomical precision and symbolic elements to depict control and dependency, blending realism with surreal tension.",
+      "image": "/images/projects/strings-of-life.jpg"
+    },
+    {
+      "title": "Circuit of Thought",
+      "medium": "Graphite on Paper",
+      "year": 2024,
+      "description": "A conceptual drawing exploring the intersection of technology and human cognition. Mechanical elements and wiring intertwine with organic forms, symbolizing the tension between control, innovation, and identity.",
+      "image": "/images/projects/circuit-of-thought.jpg"
+    },
+    {
+      "title": "Fragments of Opulence",
+      "medium": "Color pencil on paper",
+      "year": 2024,
+      "description": "A still-life composition combining natural and precious elements. The piece contrasts the organic texture of a pomegranate with the sharp geometry of rubies, exploring themes of luxury, fragility, and the interplay between nature and refinement through layered color and light.",
+      "image": "/images/projects/fragments-of-opulence.jpg"
+    },
+    {
+      "title": "Sunset Sail",
+      "medium": "Acrylic on Canvas",
+      "year": 2024,
+      "description": "A seascape capturing the glow of sunset over calm waters. The piece emphasizes vibrant color transitions and reflections, using layered brushwork to convey movement, light, and atmosphere.",
+      "image": "/images/projects/sunset-sail.jpg"
+    },
+    {
+      "title": "Spring Ascent",
+      "medium": "Acrylic on Canvas",
+      "year": 2024,
+      "description": "A landscape inspired by Japanese scenery, featuring cherry blossoms, a cable car, and a distant snow-capped peak. The composition captures movement and serenity, using soft color transitions and textured brushwork to evoke seasonal beauty.",
+      "image": "/images/projects/spring-ascent.jpg"
+    },
+    {
+      "title": "Peonies in a Vase",
+      "medium": "Acrylic on Canvas",
+      "year": 2025,
+      "description": "This piece is an exploration of light, texture, and organic form through the timeless subject of floral still life. The soft pink peonies symbolize resilience and renewal, themes that resonate deeply with my personal journey. I chose a dark, muted background to create contrast and emphasize the vibrancy of the blossoms, allowing their delicate petals to stand out. The scattered petals on the table introduce a sense of impermanence, reminding viewers of the fleeting nature of beauty and life. The painting was created using layered brushstrokes to capture the subtle variations in color and texture within each bloom. My goal was to evoke both serenity and vitality, blending classical still-life traditions with a modern, expressive approach.",
+      "image": "/images/projects/peonies-in-a-vase.jpg"
+    },
+    {
+      "title": "Ocean's Edge",
+      "medium": "Acrylic on Canvas",
+      "year": 2024,
+      "description": "This painting captures the dynamic interplay between sea and sky, focusing on the movement and energy of a breaking wave against the calm horizon. The composition emphasizes contrast: the turbulent foreground wave with its textured brushstrokes versus the expansive, serene clouds above. I aimed to convey a sense of freedom and vastness through the use of cool tones–deep blues and turquoise for the ocean, soft whites for the clouds–while maintaining warmth in the sandy shore. The layered technique creates depth, allowing viewers to feel both the immediacy of the wave and the infinite distance of the horizon. This piece reflects my fascination with nature's duality: its power and tranquility coexisting in harmony.",
+      "image": "/images/projects/oceans-edge.jpg"
+    },
+    {
+      "title": "Leap of Freedom",
+      "medium": "Colored Pencil on Paper",
+      "year": 2024,
+      "description": "This piece began as a colored pencil drawing on paper and was later digitally refined to enhance color vibrancy and depth. I aimed to capture the dynamic energy of a marlin breaking through the ocean's surface, symbolizing resilience and motion. The flying fish in the background add narrative and scale, emphasizing the interconnectedness of marine life. By combining traditional techniques with digital tools, I explored how technology can amplify detail and create a sense of movement while preserving the tactile qualities of hand-drawn art. For me, this artwork represents freedom and adaptability–qualities that inspire both my artistic and academic pursuits.",
+      "image": "/images/projects/leap-of-freedom.jpg"
+    },
+    {
+      "title": "Notes and Treats",
+      "medium": "Acrylic on Canvas",
+      "year": 2025,
+      "description": "This piece began as a colored pencil drawing and was digitally refined for color and contrast. It depicts candies scattered across a table alongside handwritten notes for various occasions–birthdays, holidays, and celebrations. The composition explores how small gestures, like sweets and messages, create moments of connection. By blending traditional and digital techniques, I aimed to evoke warmth and nostalgia while highlighting the vibrancy of everyday objects.",
+      "image": "/images/projects/notes-and-treats.jpg"
+    }
+  ];
+
+  function openModal(artwork) {
+    modalTitle.textContent = artwork.title;
+    modalMeta.textContent = `${artwork.medium} • ${artwork.year}`;
+    modalImage.src = artwork.image;
+    modalImage.alt = artwork.title;
+    modalDescription.textContent = artwork.description;
+
+    modal.classList.remove('hidden');
+
+    // Trigger animation
+    setTimeout(() => {
+      modal.style.opacity = '1';
+    }, 10);
+
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.style.opacity = '0';
+
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }, 400);
+  }
+
+  // Add click listeners to artwork cards
+  document.querySelectorAll('.artwork-card').forEach((card, index) => {
+    card.addEventListener('click', () => {
+      openModal(artworksData[index]);
+    });
+  });
+
+  // Close modal listeners
+  closeButton?.addEventListener('click', closeModal);
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // ESC key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+      closeModal();
+    }
   });
 </script>
